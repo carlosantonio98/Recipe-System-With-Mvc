@@ -3,7 +3,7 @@ $base_dir = $_SERVER["DOCUMENT_ROOT"] . "/proyecto";
 # ---------------------------------------------------
 # Recursos
 # ---------------------------------------------------
-$recursos_dir = $base_dir . "/recursos";
+$recursos_dir = $base_dir . "/resources/";
 
 #Bootstrap
 $recursos_bs_css  = "vendor/bootstrap/css/bootstrap.min.css";

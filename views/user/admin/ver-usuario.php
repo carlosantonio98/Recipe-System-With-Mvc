@@ -5,7 +5,14 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 }
 ?>
 
+
+<?php include $base_dir . "/models/model.usuario.php" ?>
 <?php include $templates_header_admin ?>
+
+<?php
+    $id = $_GET['id'];
+    $usuario->getOne($id);
+?>
 
 <body class="d-flex flex-column h-100">
     <?php include $templates_navbar_admin ?>
@@ -13,37 +20,37 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
     <!-- Begin page content -->
     <main role="main">
         <div class="container">
-            <h2><b><span class="color-red">Usuario</span> #1</b></h2>
+            <h2><b><span class="color-red">Usuario</span> #<?= $usuario->data->IdUsuario ?></b></h2>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tr>
                         <th>Nombre</th>
-                        <td>Carlos&nbsp;Antonio</td>
+                        <td><?= $usuario->data->NombreUsuario ?></td>
                     </tr>
                     <tr>
                         <th>Apellido paterno</th>
-                        <td>Camacho</td>
+                        <td><?= $usuario->data->Paterno ?></td>
                     </tr>
                     <tr>
                         <th>Apellido materno</th>
-                        <td>Alvarez</td>
+                        <td><?= $usuario->data->Materno ?></td>
                     </tr>
                     <tr>
                         <th>Nacimiento</th>
-                        <td>1998-05-03</td>
+                        <td><?= $usuario->data->Nacimiento ?></td>
                     </tr>
                     <tr>
                         <th>Pais</th>
-                        <td>Mexico</td>
+                        <td><?= $usuario->data->Pais ?></td>
                     </tr>
                     <tr>
                         <th>Correo</th>
-                        <td>carlosalvarez9805@gmail.com</td>
+                        <td><?= $usuario->data->Correo ?></td>
                     </tr>
                     <tr>
                         <th>Rol</th>
-                        <td>Admin</td>
+                        <td><?= $usuario->data->Rol ?></td>
                     </tr>
                 </table>
             </div>

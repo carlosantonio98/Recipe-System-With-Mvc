@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 }
 ?>
 
-<?php include $base_dir . "/models/model.platillo.php";?>
+<?php include $base_dir . "/models/model.platillo.php" ?>
 <?php include $templates_header_admin ?>
 
 <body class="d-flex flex-column h-100">
@@ -23,25 +23,15 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                 </div>
                 <div class="modal-body">
                     <p>¿Seguro que deseas borrar este registro?</p>
+
+                    <form action="controllers/controller.platillo.php" method="POST" id="formDelete">
+                        <input type="hidden" name="id" id="inputId">
+                        <input type="hidden" name="tipo" value="borrar">
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-danger btn-ok">Borrar</a>
+                    <button type="submit" class="btn btn-danger btn-ok" form="formDelete">Borrar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal print -->
-    <div class="modal fade" id="print-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h4>Impresion del platillo</h4>
-                </div>
-                <div class="modal-body">
-                    <iframe id="iframe-modal" src="" style="zoom:0.60" width="99.6%" height="750" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
@@ -51,6 +41,11 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
     <main role="main">
         <div class="container">
             <h2><b><span class="color-red">Catalogo</span> de platillos</b></h2>
+
+            <!-- Grupo de botones -->
+            <div class="mb-4">
+                <a href="?page=listado-platillos-pdf" class="btn btn-secondary">Imprimir listado</a>
+            </div>
 
             <!-- Filtro -->
             <div class="my-4">
@@ -97,25 +92,23 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                     </thead>
                     <tbody>
                         <?php
-                            $platillo->getAll();
+                            $platillo->getAll('FechaRegistro');
                             
                             while($row = $platillo->next()):
                         ?>
                         <tr>
-                            <td><?= $row->IdPlatillo; ?></td>
-                            <td><?= $row->Platillo; ?></td>
-                            <td><?= $row->ImagenPlatillo; ?></td>
-                            <td><?= $row->FechaRegistro; ?></td>
-                            <td><?= $row->HoraRegistro; ?></td>
-                            <td><?= $row->Categoria; ?></td>
-                            <td><?= $row->Seguimiento; ?></td>
-                            <td><?= $row->NombreUsuario; ?></td>
+                            <td><?= $row->IdPlatillo ?></td>
+                            <td><?= $row->Platillo ?></td>
+                            <td class="text-center"><img src="<?= '/proyecto/resources/img/platillos/' . $row->ImagenPlatillo ?>" alt="imagen del platillo" width="50px" height="50px"></td>
+                            <td><?= $row->FechaRegistro ?></td>
+                            <td><?= $row->HoraRegistro ?></td>
+                            <td><?= $row->Categoria ?></td>
+                            <td><?= $row->Seguimiento ?></td>
+                            <td><?= $row->NombreUsuario ?></td>
                             <td>
-                                <a href="?page=ver-platillo"><i class="fas fa-eye" data-toggle="tooltip" title="Ver"></i></a>
-                                <a href="?page=form-edit-platillo-admin"><i class="fas fa-edit" data-toggle="tooltip" title="Editar"></i></a>
-                                <a href="#" data-href="borrar-platillo-admin.html?id=1" data-toggle="modal" data-target="#confirm-delete" data-toggle="tooltip" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#" data-src="impresion1.pdf" data-toggle="modal" data-target="#print-modal"><i
-                                    class="fas  fa-print" data-toggle="tooltip" title="Imprimir"></i></a>
+                                <a href="?page=ver-platillo&id=<?= $row->IdPlatillo ?>"><i class="fas fa-eye" data-toggle="tooltip" title="Ver"></i></a>
+                                <a href="<?= $row->IdPlatillo ?>" data-toggle="modal" data-target="#confirm-delete" data-toggle="tooltip" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                <a href="?page=formato-platillo-pdf&id=<?= $row->IdPlatillo ?>"><i class="fas  fa-print" data-toggle="tooltip" title="Imprimir"></i></a>
                             </td>
                         </tr>
                         <?php endwhile; ?>

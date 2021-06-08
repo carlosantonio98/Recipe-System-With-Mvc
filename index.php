@@ -38,16 +38,16 @@ if (isset($_GET["page"])) {
             include 'views/user/cliente/menu.php';
             break;
         case 'form-create-platillo-cliente':
-            include 'views/user/cliente/form-create-platillo.php';
+            include 'views/user/cliente/form-platillo.php';
+            break;
+        case 'form-edit-platillo-cliente':
+            include 'views/user/cliente/form-platillo.php';
             break;
         case 'mis-platillos-cliente':
             include 'views/user/cliente/mis-platillos.php';
             break;
         case 'platillo-cliente':
             include 'views/user/cliente/platillo-cliente.php';
-            break;
-        case 'form-edit-platillo-cliente':
-            include 'views/user/cliente/form-edit-platillo.php';
             break;
         
         # pagina empleado
@@ -64,16 +64,16 @@ if (isset($_GET["page"])) {
             include 'views/user/empleado/form-seguimiento-platillo.php';
             break;
         case 'form-create-platillo-empleado':
-            include 'views/user/empleado/form-create-platillo.php';
+            include 'views/user/empleado/form-platillo.php';
+            break;
+        case 'form-edit-platillo-empleado':
+            include 'views/user/empleado/form-platillo.php';
             break;
         case 'mis-platillos-empleado':
             include 'views/user/empleado/mis-platillos.php';
             break;
         case 'platillo-empleado':
             include 'views/user/empleado/platillo-empleado.php';
-            break;
-        case 'form-edit-platillo-empleado':
-            include 'views/user/empleado/form-edit-platillo.php';
             break;
 
         # pagina admin
@@ -84,10 +84,10 @@ if (isset($_GET["page"])) {
             include 'views/user/admin/usuarios.php';
             break;
         case 'form-create-usuario':
-            include 'views/user/admin/form-create-usuario.php';
+            include 'views/user/admin/form-usuario.php';
             break;
         case 'form-edit-usuario':
-            include 'views/user/admin/form-edit-usuario.php';
+            include 'views/user/admin/form-usuario.php';
             break;
         case 'ver-usuario':
             include 'views/user/admin/ver-usuario.php';
@@ -107,12 +107,48 @@ if (isset($_GET["page"])) {
         case 'ver-visita':
             include 'views/user/admin/ver-visita.php';
             break;  
+        case 'listado-categorias':
+            include 'views/user/admin/categorias.php';
+            break;
+        case 'form-create-categoria':
+            include 'views/user/admin/form-categoria.php';
+            break;
+        case 'form-edit-categoria':
+            include 'views/user/admin/form-categoria.php';
+            break;
+        case 'ver-categoria':
+            include 'views/user/admin/ver-categoria.php';
+            break;
         case 'estadistica-usuarios':
             include 'views/user/admin/estadistica-usuarios.php';
             break;  
         case 'estadistica-platillos':
             include 'views/user/admin/estadistica-platillos.php';
             break; 
+        case 'listado-categorias-pdf':
+            include 'views/user/admin/listado-categorias-pdf.php';
+            break; 
+        case 'listado-platillos-pdf':
+            include 'views/user/admin/listado-platillos-pdf.php';
+            break; 
+        case 'listado-usuarios-pdf':
+            include 'views/user/admin/listado-usuarios-pdf.php';
+            break;
+        case 'listado-visitas-pdf':
+            include 'views/user/admin/listado-visitas-pdf.php';
+            break;
+        case 'formato-categoria-pdf':
+            include 'views/user/admin/formato-categoria-pdf.php';
+            break;  
+        case 'formato-platillo-pdf':
+            include 'views/user/admin/formato-platillo-pdf.php';
+            break;  
+        case 'formato-usuario-pdf':
+            include 'views/user/admin/formato-usuario-pdf.php';
+            break;  
+        case 'formato-visita-pdf':
+            include 'views/user/admin/formato-visita-pdf.php';
+            break;  
     }
 } else {
     include 'views/home/inicio.php';

@@ -5,7 +5,7 @@
 $db = Connection("finder_food");
 
 function Connection($database,$usr="root",$pass=""){
-    $obj= new DBObject("localhost",$database,$usr,$pass);
+    $obj= new DBObject("localhost:3306",$database,$usr,$pass);
     $obj->execute("set names utf8",array());
     return($obj);
 }

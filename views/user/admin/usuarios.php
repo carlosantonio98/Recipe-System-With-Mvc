@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 }
 ?>
 
-<?php include $base_dir . "/models/model.usuario.php";?>
+<?php include $base_dir . "/models/model.usuario.php" ?>
 <?php include $templates_header_admin ?>
 
 <body class="d-flex flex-column h-100">
@@ -23,25 +23,15 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                 </div>
                 <div class="modal-body">
                     <p>¿Seguro que deseas borrar este registro?</p>
+
+                    <form action="controllers/controller.usuario.php" method="POST" id="formDelete">
+                        <input type="hidden" name="id" id="inputId">
+                        <input type="hidden" name="tipo" value="borrar">
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-danger btn-ok">Borrar</a>
+                    <button type="submit" class="btn btn-danger btn-ok" form="formDelete">Borrar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal print -->
-    <div class="modal fade" id="print-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h4>Impresion del usuario</h4>
-                </div>
-                <div class="modal-body">
-                    <iframe id="iframe-modal" src="" style="zoom:0.60" width="99.6%" height="750" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
@@ -52,9 +42,10 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
         <div class="container">
             <h2><b><span class="color-red">Catalogo</span> de usuarios</b></h2>
 
-            <!-- Crear nuevo usuario -->
+            <!-- Grupo de botones -->
             <div class="mb-4">
                 <a href="?page=form-create-usuario" class="btn btn-primary"><i class="fas fa-user-plus"></i> Nuevo usuario</a>
+                <a href="?page=listado-usuarios-pdf" class="btn btn-secondary">Imprimir listado</a>
             </div>
 
             <!-- Filtro -->
@@ -104,17 +95,17 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                             while($row = $usuario->next()):
                         ?>
                         <tr>
-                            <td><?= $row->IdUsuario; ?></td>
-                            <td><?= $row->NombreUsuario; ?></td>
-                            <td><?= $row->Paterno; ?></td>
-                            <td><?= $row->Materno; ?></td>
-                            <td><?= $row->Pais; ?></td>
-                            <td><?= $row->Rol; ?></td>
+                            <td><?= $row->IdUsuario ?></td>
+                            <td><?= $row->NombreUsuario ?></td>
+                            <td><?= $row->Paterno ?></td>
+                            <td><?= $row->Materno ?></td>
+                            <td><?= $row->Pais ?></td>
+                            <td><?= $row->Rol ?></td>
                             <td>
-                                <a href="?page=ver-usuario"><i class="fas fa-eye" data-toggle="tooltip" title="Ver"></i></a>
-                                <a href="?page=form-edit-usuario"><i class="fas fa-edit" data-toggle="tooltip" title="Editar"></i></a>
-                                <a href="#" data-href="borrar-usuarios.html?id=1" data-toggle="modal" data-target="#confirm-delete" data-toggle="tooltip" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#" data-src="impresion2.pdf" data-toggle="modal" data-target="#print-modal"><i
+                                <a href="?page=ver-usuario&id=<?= $row->IdUsuario ?>"><i class="fas fa-eye" data-toggle="tooltip" title="Ver"></i></a>
+                                <a href="?page=form-edit-usuario&id=<?= $row->IdUsuario ?>"><i class="fas fa-edit" data-toggle="tooltip" title="Editar"></i></a>
+                                <a href="<?= $row->IdUsuario ?>" data-toggle="modal" data-target="#confirm-delete" data-toggle="tooltip" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                <a href="?page=formato-usuario-pdf&id=<?= $row->IdUsuario ?>"><i
                                     class="fas  fa-print" data-toggle="tooltip" title="Imprimir"></i></a>
                             </td>
                         </tr>

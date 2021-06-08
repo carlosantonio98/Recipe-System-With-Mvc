@@ -5,7 +5,11 @@
 
 <script>
     $('#confirm-delete').on('show.bs.modal', function(e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        $(this).find('#inputId').val($(e.relatedTarget).attr('href'));
+    });
+
+    $('#confirm-update').on('show.bs.modal', function(e) {
+        $(this).find('#inputId').val($(e.relatedTarget).attr('href'));
     });
 
     $('#form-modal').on('show.bs.modal', function(e) {

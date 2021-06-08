@@ -5,6 +5,13 @@ class Platillo extends Model {
     public function __construct($db) {
         parent::__construct($db);
     }
+
+    public function insertItemCategoriasDropdown($categorias, $idCategoria) {
+        while($row = $categorias->next()){
+            $comparation = ($row->IdCategoria == $idCategoria) ? 'selected':'';
+            echo "<option $comparation value=$row->IdCategoria>$row->Categoria</option>";
+        }
+    }
 }
 
 $platillo = new Platillo($db);
@@ -18,10 +25,10 @@ $platillo->addField("Preparacion");
 $platillo->addField("ImagenPlatillo");
 $platillo->addField("FechaRegistro");
 $platillo->addField("HoraRegistro");
-$platillo->addField("Categoria");
-$platillo->addField("NombreUsuario");
-$platillo->addField("Paterno");
-$platillo->addField("Materno");
-$platillo->addField("Seguimiento");
+$platillo->addField("NumeroVisita");
+$platillo->addField("NumeroDescarga");
+$platillo->addField("FkCategoria");
+$platillo->addField("FkSeguimiento");
+$platillo->addField("FkUsuario");
 $platillo->newRecord();
 ?>

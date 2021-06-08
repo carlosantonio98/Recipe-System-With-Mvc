@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 3) {
+    header('location:?page=login');
+}
+?>
+
+
+<?php include $base_dir . "/models/model.platillo.php" ?>
 <?php include $templates_header_cliente ?>
 
 <body class="d-flex flex-column h-100">
@@ -14,50 +23,35 @@
                     </h4>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card w-100 text-center" style="width: 18rem;">
-                            <span class="badge badge-success">Aceptada</span>
-                            <img class="card-img-top" src="resources/img/platillos/pla1.png" alt="Comida">
-                            <div class="card-body">
-                                <div class="mb-2">
-                                    <h5 class="card-title mb-0">Albóndigas a la boloñesa</h5>
-                                    <small class="card-subtitle color-red">Comida</small>
-                                </div>
-                                <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                <a href="?page=platillo-cliente" class="btn btn-outline-primary btn-block">Ver receta</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+                        $condition = 'FkUsuario='.$_SESSION['usuario']->IdUsuario;
+                        $platillo->getWhere($condition);
 
+                        while($row = $platillo->next()):
+                    ?>
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card w-100 text-center" style="width: 18rem;">
-                            <span class="badge badge-warning">En proceso</span>
-                            <img class="card-img-top" src="resources/img/platillos/pla1.png" alt="Comida">
-                            <div class="card-body">
-                                <div class="mb-2">
-                                    <h5 class="card-title mb-0">Camarones a la diabla</h5>
-                                    <small class="card-subtitle color-red">Comida</small>
-                                </div>
-                                <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                <a href="?page=platillo-cliente" class="btn btn-outline-primary btn-block">Ver receta</a>
-                            </div>
-                        </div>
-                    </div>
+                            <!-- Badge -->
+                            <?php if($row->FkSeguimiento == 1): ?>
+                                <span class="badge bg-warning"><?= $row->Seguimiento ?></span>
+                            <?php elseif($row->FkSeguimiento == 2): ?>
+                                <span class="badge bg-success"><?= $row->Seguimiento ?></span>
+                            <?php elseif($row->FkSeguimiento == 3): ?>
+                                <span class="badge bg-danger"><?= $row->Seguimiento ?></span>
+                            <?php endif; ?>
 
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card w-100 text-center" style="width: 18rem;">
-                            <span class="badge badge-warning">En proceso</span>
-                            <img class="card-img-top" src="resources/img/platillos/pla1.png" alt="Comida">
+                            <img class="card-img-top" src="resources/img/platillos/<?= $row->ImagenPlatillo ?>" alt="platillo">
                             <div class="card-body">
                                 <div class="mb-2">
-                                    <h5 class="card-title mb-0">Linguini con camarón</h5>
-                                    <small class="card-subtitle color-red">Comida</small>
+                                    <h5 class="card-title mb-0"><?= $row->Platillo ?></h5>
+                                    <small class="card-subtitle color-red"><?= $row->Categoria ?></small>
                                 </div>
-                                <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                <a href="?page=platillo-cliente" class="btn btn-outline-primary btn-block">Ver receta</a>
+                                <p class="card-text"><span class="text-muted">escrito por</span> <?= $row->NombreUsuario ?></p>
+                                <a href="?page=platillo-cliente&id=<?= $row->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                             </div>
                         </div>
                     </div>
+                    <?php endwhile; ?>
                 </div>
             </section>
         </div>

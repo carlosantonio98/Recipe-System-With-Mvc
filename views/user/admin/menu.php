@@ -43,6 +43,19 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <a href="?page=listado-categorias">
+                        <div class="card w-100">
+                            <i class="fas fa-coffee p-5"></i>
+                            <div class="card-body">
+                                <div class="card-subtitle">
+                                    <p>Categorias</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
                     <a href="?page=listado-visitas">
                         <div class="card w-100">
                             <i class="fas fa-eye p-5"></i>

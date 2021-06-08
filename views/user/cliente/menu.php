@@ -1,6 +1,6 @@
 ﻿<?php
 session_start();
-if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>3) {
+if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 3) {
     header('location:?page=login');
 }
 ?>
@@ -34,7 +34,7 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>3) {
                             <i class="fas fa-clipboard-list p-5"></i>
                             <div class="card-body">
                                 <div class="card-subtitle">
-                                    <p>Mis platillos</p>
+                                    <p>Mis recetas</p>
                                 </div>
                             </div>
                         </div>

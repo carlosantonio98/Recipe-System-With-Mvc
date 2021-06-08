@@ -1,4 +1,18 @@
-﻿<?php include $templates_header_cliente ?>
+﻿<?php
+session_start();
+if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 3) {
+    header('location:?page=login');
+}
+?>
+
+
+<?php include $base_dir . "/models/model.platillo.php" ?>
+<?php include $templates_header_cliente ?>
+
+<?php
+    $id = $_GET['id'];
+    $platillo->getOne($id);
+?>
 
 <body class="d-flex flex-column h-100">
     <?php include $templates_navbar_cliente ?>
@@ -14,10 +28,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>¿Seguro que deseas borrar este registro?</p>
+                    <p>¿Seguro que deseas borrar esta receta?</p>
+
+                    <form action="controllers/controller.platillo.php" method="POST" id="formDelete">
+                        <input type="hidden" name="id" id="inputId">
+                        <input type="hidden" name="tipo" value="borrar">
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-danger btn-ok">Borrar</a>
+                    <button type="submit" class="btn btn-danger btn-ok" form="formDelete">Borrar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -29,34 +48,40 @@
         <div class="container container-recipe">
             <div class="header-recipe row mb-4">
                 <div class="col-12 col-md-8">
-                    <img src="resources/img/platillos/pla1.png" alt="albondigas a la boloñesa">
+                    <img src="resources/img/platillos/<?= $platillo->data->ImagenPlatillo ?>" alt="imagen platillo">
                 </div>
                 <div class="col-12 col-md-4 mb-4">
-                    <small class="color-red">Comida</small>
-                    <h3>Como preparar Albóndigas a la boloñesa</h3>
+                    <small class="color-red"><?= $platillo->data->Categoria ?></small>
+                    <h3>Como preparar <?= $platillo->data->Platillo ?></h3>
 
                     <div class="dates row text-center mb-4">
                         <div class="user col-4">
                             <i class="fas fa-user circle-shadow"></i>
-                            <small class="d-block mt-2"><span class="text-muted">Por</span> Marlene</small>
+                            <small class="d-block mt-2"><span class="text-muted">Por</span> <?= $platillo->data->NombreUsuario ?></small>
                         </div>
                         <div class="date col-4">
                             <i class="fas fa-calendar-alt circle-shadow"></i>
-                            <small class="text-muted d-block mt-2">22/03/2021</small>
+                            <small class="text-muted d-block mt-2"><?= $platillo->data->FechaRegistro ?></small>
                         </div>
 
                         <div class="time col-4">
                             <i class="fas fa-clock circle-shadow"></i>
-                            <small class="text-muted d-block mt-2">19:20:0</small>
+                            <small class="text-muted d-block mt-2"><?= $platillo->data->HoraRegistro ?></small>
                         </div>
                     </div>
 
+                    <!-- Acciones -->
                     <div class="row">
+                        <!-- Se activara cuando el seguimiento sea en proceso -->
+                        <?php if($platillo->data->FkSeguimiento == 1): ?>
+                            <div class="col-6 p-1 m-0">
+                                <a href="?page=form-edit-platillo-cliente&id=<?= $id ?>" class="btn btn-primary w-100"><i class="fas fa-edit"></i> Actualizar</a>
+                            </div>
+                        <?php endif; ?>
+
+                        
                         <div class="col-6 p-1 m-0">
-                            <a href="?page=form-edit-platillo-cliente" class="btn btn-primary w-100"><i class="fas fa-edit"></i> Actualizar</a>
-                        </div>
-                        <div class="col-6 p-1 m-0">
-                            <a href="#" class="btn btn-danger w-100" data-href="borrar-usuarios.html?id=1" data-toggle="modal" data-target="#confirm-delete"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                            <a href="<?= $id ?>" class="btn btn-danger w-100" data-toggle="modal" data-target="#confirm-delete" data-toggle="tooltip" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</a>
                         </div>
                         <div class="col-6 p-1 m-0">
                             <a href="impresion.pdf" download="RecetaTest" class="btn btn-success w-100"><i class="fas fa-file-download"></i> Descargar</a>
@@ -73,21 +98,13 @@
                     <h6>
                         Ingredientes:
                     </h6>
-                    <p>
-                        250 g de Linguini 1 cucharada de aceite de oliva 20 piezas de camarón 4 dientes de ajo (rebanado en láminas) 1 cucharadita de orégano 2 cucharadas de albahaca seca 2 cucharadas de pepperoncini 6 piezas de jitomate 400 g 1 pieza queso de cabra rallado
-                        200 g 1 sal de mesa al gusto 1 pimienta al gusto
-                    </p>
+                    <p><?= $platillo->data->Ingrediente ?></p>
                 </div>
                 <div class="col-12">
                     <h6>
                         Preparación:
                     </h6>
-                    <p>
-                        Cocina la pasta con agua, sal y una gotas con aceite de oliva hasta que queden "al dente", este proceso tardará alrededor de 12 minutos, cuando esté lista retira el agua Hierve agua en una olla y sumerge los jitomates por 2 minutos, después colócalos
-                        en un recipiente con hielo para que los puedas pelar y cortarlos en cubo pequeños Limpia los camarones: quítales la cabeza y pélalos con cuidado hasta que sólo quede la carne, en ese momento bajo el chorro de agua corta el lomo
-                        del camarón y retira el aparato digestivo que es la parte negra y gelatinosa En un sartén con un poco de aceite añade ajo, orégano, albahaca y pepperocini para sofreír los camarones, en dos minutos agrega el jitomate y termina
-                        de cocer todo Añade la pasta al sartén e incorpora queso de cabra, después apaga el fuego y corona tu plato con unas hojitas de albahaca
-                    </p>
+                    <p><?= $platillo->data->Preparacion ?></p>
                 </div>
             </div>
         </div>

@@ -5,7 +5,14 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 }
 ?>
 
+
+<?php include $base_dir . "/models/model.platillo.php" ?>
 <?php include $templates_header_admin ?>
+
+<?php
+    $id = $_GET['id'];
+    $platillo->getOne($id);
+?>
 
 <body class="d-flex flex-column h-100">
     <?php include $templates_navbar_admin ?>
@@ -13,55 +20,45 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
     <!-- Begin page content -->
     <main role="main">
         <div class="container">
-            <h2><b><span class="color-red">Platillo</span> #1</b></h2>
+            <h2><b><span class="color-red">Platillo</span> #<?= $platillo->data->Idplatillo ?></b></h2>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tr>
                         <th>Platillo</th>
-                        <td>Linguini&nbsp;con&nbsp;camarón</td>
+                        <td><?= $platillo->data->Platillo ?></td>
                     </tr>
                     <tr>
                         <th>Imagen</th>
-                        <td>linguini.jpeg</td>
+                        <td><img src="<?= '/proyecto/resources/img/platillos/' . $platillo->data->ImagenPlatillo; ?>" alt="imagen del platillo" width="100px" height="100px" style="object-fit: cover;"></td>
                     </tr>
                     <tr>
                         <th>Ingrediente</th>
-                        <td>
-                            250 g de Linguini 1 cucharada de aceite de oliva 20 piezas de camarón 4 dientes de ajo (rebanado en láminas) 1 cucharadita de orégano 2 cucharadas de albahaca seca 2 cucharadas de pepperoncini 6 piezas de jitomate 400 g 1 pieza queso de cabra rallado
-                            200 g 1 sal de mesa al gusto 1 pimienta al gusto
-                        </td>
+                        <td><?= $platillo->data->Ingrediente ?></td>
                     </tr>
                     <tr>
                         <th>Preparación</th>
-                        <td>
-
-                            Cocina la pasta con agua, sal y una gotas con aceite de oliva hasta que queden "al dente", este proceso tardará alrededor de 12 minutos, cuando esté lista retira el agua Hierve agua en una olla y sumerge los jitomates por 2 minutos, después colócalos
-                            en un recipiente con hielo para que los puedas pelar y cortarlos en cubo pequeños Limpia los camarones: quítales la cabeza y pélalos con cuidado hasta que sólo quede la carne, en ese momento bajo el chorro de agua corta el
-                            lomo del camarón y retira el aparato digestivo que es la parte negra y gelatinosa En un sartén con un poco de aceite añade ajo, orégano, albahaca y pepperocini para sofreír los camarones, en dos minutos agrega el jitomate y
-                            termina de cocer todo Añade la pasta al sartén e incorpora queso de cabra, después apaga el fuego y corona tu plato con unas hojitas de albahaca
-
-                        </td>
+                        <td><?= $platillo->data->Preparacion ?></td>
                     </tr>
                     <tr>
                         <th>Fecha</th>
-                        <td>17/3/2021</td>
+                        <td><?= $platillo->data->FechaRegistro ?></td>
                     </tr>
                     <tr>
                         <th>Hora</th>
-                        <td>21:47:16</td>
+                        <td><?= $platillo->data->HoraRegistro ?></td>
                     </tr>
                     <tr>
                         <th>Categoria</th>
-                        <td>Comida</td>
+                        <td><?= $platillo->data->Categoria ?></td>
                     </tr>
                     <tr>
                         <th>Seguimiento</th>
-                        <td>En proceso</td>
+                        <td><?= $platillo->data->Seguimiento ?></td>
                     </tr>
                     <tr>
                         <th>Usuario</th>
-                        <td>Jesus&nbsp;Abelardo&nbsp;</td>
+                        <td><?= $platillo->data->NombreUsuario ?></td>
                     </tr>
                 </table>
             </div>

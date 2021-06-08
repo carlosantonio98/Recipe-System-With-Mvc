@@ -64,7 +64,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla1.png" alt="Comida">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="Comida">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Albóndigas a la boloñesa</h5>
@@ -79,7 +79,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla1.png" alt="Comida">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="Comida">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Camarones a la diabla</h5>
@@ -94,7 +94,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla1.png" alt="Comida">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="Comida">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Linguini con camarón</h5>
@@ -180,7 +180,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla2.jpg" alt="desayuno">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="desayuno">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Pan frances</h5>
@@ -195,7 +195,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla2.jpg" alt="desayuno">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="desayuno">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Bowl italiano</h5>
@@ -223,7 +223,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla3.jpg" alt="ensalada">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="ensalada">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Ensalada de camarón</h5>
@@ -238,7 +238,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla3.jpg" alt="ensalada">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="ensalada">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Ensalada César</h5>
@@ -253,7 +253,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card w-100 text-center" style="width: 18rem;">
                                 <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/platillos/pla3.jpg" alt="ensalada">
+                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="ensalada">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h5 class="card-title mb-0">Ensalada rusa</h5>

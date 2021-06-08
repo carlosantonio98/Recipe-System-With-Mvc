@@ -47,6 +47,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="?page=listado-usuarios">Usuarios</a>
                             <a class="dropdown-item" href="?page=listado-platillos">Platillos</a>
+                            <a class="dropdown-item" href="?page=listado-categorias">Categorias</a>
                             <a class="dropdown-item" href="?page=listado-visitas">Visitas</a>
                         </div>
                     </li>

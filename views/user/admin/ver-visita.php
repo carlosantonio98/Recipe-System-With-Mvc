@@ -5,7 +5,14 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 }
 ?>
 
+
+<?php include $base_dir . "/models/model.visita.php" ?>
 <?php include $templates_header_admin ?>
+
+<?php
+    $id = $_GET['id'];
+    $visita->getOne($id);
+?>
 
 <body class="d-flex flex-column h-100">
     <?php include $templates_navbar_admin ?>
@@ -13,41 +20,41 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
     <!-- Begin page content -->
     <main role="main">
         <div class="container">
-            <h2><b><span class="color-red">Visita</span> #1</b></h2>
+            <h2><b><span class="color-red">Visita</span> #<?= $visita->data->IdVisita ?></b></h2>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tr>
                         <th>Fecha</th>
-                        <td>17/3/2021</td>
+                        <td><?= $visita->data->FechaVisita ?></td>
                     </tr>
                     <tr>
                         <th>Hora</th>
-                        <td>21:47:16</td>
+                        <td><?= $visita->data->HoraVisita ?></td>
                     </tr>
                     <tr>
                         <th>Nombre usuario</th>
-                        <td>Carlos Antonio</td>
+                        <td><?= $visita->data->NombreUsuario ?></td>
                     </tr>
                     <tr>
                         <th>Paterno</th>
-                        <td>Camacho</td>
+                        <td><?= $visita->data->Paterno ?></td>
                     </tr>
                     <tr>
                         <th>Materno</th>
-                        <td>Alvarez</td>
+                        <td><?= $visita->data->Materno ?></td>
                     </tr>
                     <tr>
                         <th>Correo</th>
-                        <td>carlosalvarez9805@gmail.com</td>
+                        <td><?= $visita->data->Correo ?></td>
                     </tr>
                     <tr>
                         <th>Pais</th>
-                        <td>Mexico</td>
+                        <td><?= $visita->data->Pais ?></td>
                     </tr>
                     <tr>
                         <th>Rol</th>
-                        <td>Admin</td>
+                        <td><?= $visita->data->Rol ?></td>
                     </tr>
                 </table>
             </div>

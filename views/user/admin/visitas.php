@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 }
 ?>
 
-<?php include $base_dir . "/models/model.visitas.php";?>
+<?php include $base_dir . "/models/model.visita.php" ?>
 <?php include $templates_header_admin ?>
 
 <body class="d-flex flex-column h-100">
@@ -32,25 +32,15 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
         </div>
     </div>
 
-    <!-- Modal print -->
-    <div class="modal fade" id="print-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h4>Impresion del platillo</h4>
-                </div>
-                <div class="modal-body">
-                    <iframe id="iframe-modal" src="" style="zoom:0.60" width="99.6%" height="750" frameborder="0"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Begin page content -->
     <main role="main">
         <div class="container">
             <h2><b><span class="color-red">Catalogo</span> de visitas</b></h2>
+
+            <!-- Grupo de botones -->
+            <div class="mb-4">
+                <a href="?page=listado-visitas-pdf" class="btn btn-secondary">Imprimir listado</a>
+            </div>
 
             <!-- Filtro -->
             <div class="my-4">
@@ -110,7 +100,8 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                             <td><?= $row->Materno; ?></td>
                             <td><?= $row->Rol; ?></td>
                             <td>
-                                <a href="?page=ver-visita"><i class="fas fa-eye" data-toggle="tooltip" title="Ver"></i></a>
+                                <a href="?page=ver-visita&id=<?= $row->IdVisita ?>"><i class="fas fa-eye" data-toggle="tooltip" title="Ver"></i></a>
+                                <a href="?page=formato-visita-pdf&id=<?= $row->IdVisita ?>"><i class="fas  fa-print" data-toggle="tooltip" title="Imprimir"></i></a>
                             </td>
                         </tr>
                         <?php endwhile; ?>
