@@ -84,7 +84,7 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 2) {
                             <a href="<?= $id ?>" class="btn btn-danger w-100" data-toggle="modal" data-target="#confirm-delete" data-toggle="tooltip" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</a>
                         </div>
                         <div class="col-6 p-1 m-0">
-                            <a href="impresion.pdf" download="RecetaTest" class="btn btn-success w-100"><i class="fas fa-file-download"></i> Descargar</a>
+                            <a href="?page=platillo-pdf&id=<?= $platillo->data->IdPlatillo ?>" class="btn btn-success w-100"><i class="fas fa-file-download"></i> Descargar</a>
                         </div>
                         <div class="col-6 p-1 m-0">
                             <a href="?page=mis-platillos-empleado" class="btn btn-link w-100"> Regresar</a>

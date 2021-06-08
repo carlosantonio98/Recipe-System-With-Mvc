@@ -1,27 +1,46 @@
 <?php
-    session_start();
-    if ($_SESSION['usuario']->FkRol == 1) {
-        include $templates_header_admin;
-    } else if ($_SESSION['usuario']->FkRol == 2) {
-        include $templates_header_empleado;
-    } else if ($_SESSION['usuario']->FkRol == 3) {
-        include $templates_header_cliente;
-    } else {
-        include $templates_header;
+session_start();
+if ($_SESSION['usuario']->FkRol == 1) {
+    include $templates_header_admin;
+} else if ($_SESSION['usuario']->FkRol == 2) {
+    include $templates_header_empleado;
+} else if ($_SESSION['usuario']->FkRol == 3) {
+    include $templates_header_cliente;
+} else {
+    include $templates_header;
+}
+
+// Implementando los modelos
+include_once('./models/model.platillo.php');
+
+// Cargando las recetas
+function getDishes($platillo, $idCategorias, $delimitador)
+{
+    $platillos = [];
+    $platillo->getDelimiter('FkCategoria=' . $idCategorias . ' AND FkSeguimiento=2', '', $delimitador);
+    while ($row = $platillo->next()) {
+        $platillos[] = $row;
     }
+    return $platillos;
+}
+
+$platillosCat1 = getDishes($platillo, 1, 3); // comida
+$platillosCat2 = getDishes($platillo, 2, 3); // postre
+$platillosCat3 = getDishes($platillo, 3, 3); // desayuno
+$platillosCat4 = getDishes($platillo, 4, 3); // ensalada
 ?>
 
 <body class="d-flex flex-column h-100">
-    <?php 
-        if ($_SESSION['usuario']->FkRol == 1) {
-            include $templates_navbar_admin;
-        } else if ($_SESSION['usuario']->FkRol == 2) {
-            include $templates_navbar_empleado;
-        } else if ($_SESSION['usuario']->FkRol == 3) {
-            include $templates_navbar_cliente;
-        } else {
-            include $templates_navbar;
-        }
+    <?php
+    if ($_SESSION['usuario']->FkRol == 1) {
+        include $templates_navbar_admin;
+    } else if ($_SESSION['usuario']->FkRol == 2) {
+        include $templates_navbar_empleado;
+    } else if ($_SESSION['usuario']->FkRol == 3) {
+        include $templates_navbar_cliente;
+    } else {
+        include $templates_navbar;
+    }
     ?>
 
     <!-- Begin page content -->
@@ -61,53 +80,27 @@
                         </h4>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="Comida">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Albóndigas a la boloñesa</h5>
-                                        <small class="card-subtitle color-red">Comida</small>
-                                    </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="Comida">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Camarones a la diabla</h5>
-                                        <small class="card-subtitle color-red">Comida</small>
+                        <?php foreach ($platillosCat1 as $item) : ?>
+                            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                <div class="card w-100 text-center" style="width: 18rem;">
+                                    <span class="badge badge-danger">Nuevo</span>
+                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Comida">
+                                    <div class="card-body">
+                                        <div class="mb-2">
+                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
+                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
+                                        </div>
+                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
+                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                                     </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
                                 </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="Comida">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Linguini con camarón</h5>
-                                        <small class="card-subtitle color-red">Comida</small>
-                                    </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="footer-more text-center">
-                        <a href="?page=comidas" class="btn btn-red">Ver más</a>
+                        <a href="?page=mas-platillos&id=1" class="btn btn-red">Ver más</a>
                     </div>
                 </section>
 
@@ -119,53 +112,27 @@
                         </h4>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="postre" width="100%">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Carlota de chocolate</h5>
-                                        <small class="card-subtitle color-red">Postre</small>
-                                    </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Guadalupe Cristel</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="postre" width="100%">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Arroz con leche</h5>
-                                        <small class="card-subtitle color-red">Postre</small>
+                        <?php foreach ($platillosCat2 as $item) : ?>
+                            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                <div class="card w-100 text-center" style="width: 18rem;">
+                                    <span class="badge badge-danger">Nuevo</span>
+                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Postre">
+                                    <div class="card-body">
+                                        <div class="mb-2">
+                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
+                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
+                                        </div>
+                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
+                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                                     </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Guadalupe Cristel</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
                                 </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="postre" width="100%">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Alfajores</h5>
-                                        <small class="card-subtitle color-red">Postre</small>
-                                    </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Jesus Abelardo </p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="footer-more text-center">
-                        <a href="?page=postres" class="btn btn-red">Ver más</a>
+                        <a href="?page=mas-platillos&id=2" class="btn btn-red">Ver más</a>
                     </div>
                 </section>
 
@@ -177,38 +144,27 @@
                         </h4>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="desayuno">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Pan frances</h5>
-                                        <small class="card-subtitle color-red">Desayuno</small>
-                                    </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="desayuno">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Bowl italiano</h5>
-                                        <small class="card-subtitle color-red">Desayuno</small>
+                        <?php foreach ($platillosCat3 as $item) : ?>
+                            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                <div class="card w-100 text-center" style="width: 18rem;">
+                                    <span class="badge badge-danger">Nuevo</span>
+                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Desayuno">
+                                    <div class="card-body">
+                                        <div class="mb-2">
+                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
+                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
+                                        </div>
+                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
+                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                                     </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Guadalupe Cristel</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
                                 </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
+
                     </div>
                     <div class="footer-more text-center">
-                        <a href="?page=desayunos" class="btn btn-red">Ver más</a>
+                        <a href="?page=mas-platillos&id=3" class="btn btn-red">Ver más</a>
                     </div>
                 </section>
 
@@ -220,59 +176,33 @@
                         </h4>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="ensalada">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Ensalada de camarón</h5>
-                                        <small class="card-subtitle color-red">Ensalada</small>
-                                    </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Marlene</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="ensalada">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Ensalada César</h5>
-                                        <small class="card-subtitle color-red">Ensalada</small>
+                        <?php foreach ($platillosCat4 as $item) : ?>
+                            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                <div class="card w-100 text-center" style="width: 18rem;">
+                                    <span class="badge badge-danger">Nuevo</span>
+                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Ensalada">
+                                    <div class="card-body">
+                                        <div class="mb-2">
+                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
+                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
+                                        </div>
+                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
+                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                                     </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Jesus Abelardo</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
                                 </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
-                            <div class="card w-100 text-center" style="width: 18rem;">
-                                <span class="badge badge-danger">Nuevo</span>
-                                <img class="card-img-top" src="resources/img/fondo.jpg" alt="ensalada">
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <h5 class="card-title mb-0">Ensalada rusa</h5>
-                                        <small class="card-subtitle color-red">Ensalada</small>
-                                    </div>
-                                    <p class="card-text"><span class="text-muted">escrito por</span> Guadalupe Cristel</p>
-                                    <a href="?page=platillo" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="footer-more text-center">
-                        <a href="?page=ensaladas" class="btn btn-red">Ver más</a>
+                        <a href="?page=mas-platillos&id=4" class="btn btn-red">Ver más</a>
                     </div>
                 </section>
             </div>
         </div>
     </main>
-    
+
 
     <footer class="footer mt-auto py-3">
         <div class="container">
@@ -287,16 +217,16 @@
         </div>
     </footer>
 
-    <?php 
-        if ($_SESSION['usuario']->FkRol == 1) {
-            include $templates_footer_admin;
-        } else if ($_SESSION['usuario']->FkRol == 2) {
-            include $templates_footer_empleado;
-        } else if ($_SESSION['usuario']->FkRol == 3) {
-            include $templates_footer_cliente;
-        } else {
-            include $templates_footer;
-        }
+    <?php
+    if ($_SESSION['usuario']->FkRol == 1) {
+        include $templates_footer_admin;
+    } else if ($_SESSION['usuario']->FkRol == 2) {
+        include $templates_footer_empleado;
+    } else if ($_SESSION['usuario']->FkRol == 3) {
+        include $templates_footer_cliente;
+    } else {
+        include $templates_footer;
+    }
     ?>
 </body>
 

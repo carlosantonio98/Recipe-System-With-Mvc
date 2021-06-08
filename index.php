@@ -14,20 +14,14 @@ if (isset($_GET["page"])) {
         case 'ayuda':
             include 'views/home/ayuda.php';
             break;
-        case 'comidas':
-            include 'views/home/comidas.php';
-            break;
-        case 'postres':
-            include 'views/home/postres.php';
-            break;
-        case 'desayunos':
-            include 'views/home/desayunos.php';
-            break;
-        case 'ensaladas':
-            include 'views/home/ensaladas.php';
-            break;
         case 'platillo':
             include 'views/home/platillo.php';
+            break;
+        case 'mas-platillos':
+            include 'views/home/masPlatillos.php';
+            break;
+        case 'platillo-pdf':
+            include 'views/home/platillo-pdf.php';
             break;
         case 'login':
             include 'views/home/login.php';

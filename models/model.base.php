@@ -44,6 +44,13 @@ class Model {
         $this->data=$this->db->recordSet("SELECT * FROM {$this->view} WHERE {$condition} {$ord}");
     }
 
+    public function getDelimiter($condition, $order="", $delimiter="") {
+        if($order) $ord = " ORDER BY {$order}"; else $ord="";
+        if($delimiter) $delimit = " LIMIT {$delimiter}"; else $delimit="";
+
+        $this->data=$this->db->recordSet("SELECT * FROM {$this->view} WHERE {$condition} {$ord} {$delimit}");
+    }
+
     public function next(){
         return $this->db->next($this->data);
     }
