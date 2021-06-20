@@ -1,6 +1,6 @@
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-red">
+    <nav class="navbar navbar-expand-md navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand" href="?page=inicio"><b>Finder Food</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
                     </li>
                 </ul>
                 <div>
-                    <a href="controllers/controller.logout.php" class="btn btn-outline-white my-2 my-sm-0">Salir</a>
+                    <a href="controllers/controller.logout.php" class="btn btn-outline-dark-custom mx-1 px-3 my-2 my-sm-0">Salir</a>
                 </div>
             </div>
         </div>

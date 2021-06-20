@@ -4,7 +4,6 @@
 <script src=<?= $recursos_bs_js ?>></script>
 <script src=<?= $chartBundle_js ?>></script>
 <script src=<?= $chartUtils_js ?>></script>
-<script src=<?= $acciones_js ?>></script>
 
 <script>
     $('#confirm-delete').on('show.bs.modal', function(e) {

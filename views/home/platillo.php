@@ -13,9 +13,11 @@
     }
 ?>
 
-<?php include $base_dir . "/models/model.platillo.php" ?>
+<?php include $base_dir . "/models/model.platillo.php" ?> 
+<?php include $base_dir . "/models/model.visita-platillo.php" ?> 
 <?php
     $id = $_GET['id'];
+    $visitaPlatillo->createVisit($id);
     $platillo->getOne($id);
 ?>
 

@@ -52,7 +52,7 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 2) {
     <!-- Begin page content -->
     <main role="main">
         <div class="container">
-            <h2><b><span class="color-red">Platillo</span> #<?= $platillo->data->Idplatillo ?></b></h2>
+            <h2><b><span class="color-red">Platillo</span> #<?= $platillo->data->IdPlatillo ?></b></h2>
 
             <div class="table-responsive">
                 <table class="table table-striped">

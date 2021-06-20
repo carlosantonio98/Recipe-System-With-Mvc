@@ -1,51 +1,51 @@
-﻿<?php 
-    session_start();
-    if (!isset($_SESSION['usuario'])) {
-        header('location:?page=login');
-    }
-    
-    if ($_SESSION['usuario']->FkRol == 1) {
-        include $templates_header_admin;
-    } else if ($_SESSION['usuario']->FkRol == 2) {
-        include $templates_header_empleado;
-    } else if ($_SESSION['usuario']->FkRol == 3) {
-        include $templates_header_cliente;
-    }
-    
-    
-    include_once('./models/model.platillo.php');
-    $idCategoria = $_GET['id'];
-    $platillo->getWhere('FkCategoria=' . $idCategoria);
+﻿<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('location:?page=login');
+}
 
-    // creando variable para el titulo
-    $titulo = '';
-    switch($idCategoria) {
-        case 1:
-            $titulo = 'comidas';
-            break;
-        case 2:
-            $titulo = 'postres';
-            break;
-        case 3:
-            $titulo = 'desayunos';
-            break;
-        case 4:
-            $titulo = 'ensaladas';
-            break;
-    }
+if ($_SESSION['usuario']->FkRol == 1) {
+    include $templates_header_admin;
+} else if ($_SESSION['usuario']->FkRol == 2) {
+    include $templates_header_empleado;
+} else if ($_SESSION['usuario']->FkRol == 3) {
+    include $templates_header_cliente;
+}
+
+
+include_once('./models/model.platillo.php');
+$idCategoria = $_GET['id'];
+$platillo->getWhere('FkCategoria=' . $idCategoria . ' AND FkSeguimiento=2');
+
+// creando variable para el titulo
+$titulo = '';
+switch ($idCategoria) {
+    case 1:
+        $titulo = 'comidas';
+        break;
+    case 2:
+        $titulo = 'postres';
+        break;
+    case 3:
+        $titulo = 'desayunos';
+        break;
+    case 4:
+        $titulo = 'ensaladas';
+        break;
+}
 ?>
 
 
 
 <body class="d-flex flex-column h-100">
-    <?php 
-        if ($_SESSION['usuario']->FkRol == 1) {
-            include $templates_navbar_admin;
-        } else if ($_SESSION['usuario']->FkRol == 2) {
-            include $templates_navbar_empleado;
-        } else if ($_SESSION['usuario']->FkRol == 3) {
-            include $templates_navbar_cliente;
-        }
+    <?php
+    if ($_SESSION['usuario']->FkRol == 1) {
+        include $templates_navbar_admin;
+    } else if ($_SESSION['usuario']->FkRol == 2) {
+        include $templates_navbar_empleado;
+    } else if ($_SESSION['usuario']->FkRol == 3) {
+        include $templates_navbar_cliente;
+    }
     ?>
 
     <!-- Begin page content -->
@@ -60,20 +60,18 @@
                 </div>
                 <div class="row">
 
-                    <?php while($row = $platillo->next()): ?>
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card w-100 text-center" style="width: 18rem;">
-                            <img class="card-img-top" src="resources/img/platillos/<?= $row->ImagenPlatillo ?>" alt="<?= $row->Categoria ?>">
-                            <div class="card-body">
-                                <div class="mb-2">
-                                    <h5 class="card-title mb-0"><?= $row->Platillo ?></h5>
-                                    <small class="card-subtitle color-red"><?= $row->Categoria ?></small>
+                    <?php while ($row = $platillo->next()) : ?>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4 mt-lg-dish">
+                            <div class="card w-100 d-flex justify-content-center align-items-center" style="width: 18rem;">
+                                <img src="resources/img/platillos/<?= $row->ImagenPlatillo ?>" alt="<?= $row->Categoria ?>">
+                                <div class="card-body">
+                                    <h6 class="card-title mb-2"><?= $row->Platillo ?></h6>
+                                    <p class="p-0 m-0 mb-1 text-muted"><i class="fas fa-user"></i> <?= $row->NombreUsuario ?></p>
+                                    <p class="p-0 m-0 mb-2"><i class="fas fa-quote-left"></i> <?= $row->Categoria ?></p>
+                                    <a href="?page=platillo&id=<?= $row->IdPlatillo ?>" class="btn btn-view-more"><i class="fas fa-eye"></i></a>
                                 </div>
-                                <p class="card-text"><span class="text-muted">escrito por</span> <?= $row->NombreUsuario ?></p>
-                                <a href="?page=platillo&id=<?= $row->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                             </div>
                         </div>
-                    </div>
                     <?php endwhile; ?>
 
                 </div>
@@ -94,14 +92,14 @@
         </div>
     </footer>
 
-    <?php 
-        if ($_SESSION['usuario']->FkRol == 1) {
-            include $templates_footer_admin;
-        } else if ($_SESSION['usuario']->FkRol == 2) {
-            include $templates_footer_empleado;
-        } else if ($_SESSION['usuario']->FkRol == 3) {
-            include $templates_footer_cliente;
-        }
+    <?php
+    if ($_SESSION['usuario']->FkRol == 1) {
+        include $templates_footer_admin;
+    } else if ($_SESSION['usuario']->FkRol == 2) {
+        include $templates_footer_empleado;
+    } else if ($_SESSION['usuario']->FkRol == 3) {
+        include $templates_footer_cliente;
+    }
     ?>
 </body>
 

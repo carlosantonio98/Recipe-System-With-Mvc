@@ -1,14 +1,29 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
+if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 1) {
     header('location:?page=login');
 }
 ?>
 
+
+<?php include $base_dir . "/models/model.platillo.php" ?>
 <?php include $templates_header_admin ?>
+<?php
+    $platillo->getDataGraficaBarra1('2021');
+    $dataBarra1 = [];                    
+    while($row = $platillo->next()) {
+        $dataBarra1[] = $row;
+    }
+
+    $platillo->getDataGraficaBarra2('2021');
+    $dataBarra2 = [];                    
+    while($row = $platillo->next()) {
+        $dataBarra2[] = $row;
+    }
+?>
 
 <body class="d-flex flex-column h-100">
-    <?php include $templates_navbar_admin ?>  
+    <?php include $templates_navbar_admin ?>
 
     <!-- Modal print -->
     <div class="modal fade" id="print-modal" tabindex="-1" role="dialog">
@@ -74,22 +89,17 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Postre</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>Comida</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>Botana</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>Ensalada</td>
-                            <td>5</td>
-                        </tr>
+                        <?php
+                        $platillo->getEstadisticaTipoPlatilloMasVisitado('2021');
+                        while ($row = $platillo->next()) :
+                        ?>
+                            <tr>
+                                <td><?= $row->Categoria ?></td>
+                                <td><?= $row->Visitas ?></td>
+                            </tr>
+                        <?php
+                        endwhile;
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -110,26 +120,21 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Albóndigas a la boloñesa</td>
-                            <td>Comida</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Carlota de chocolate</td>
-                            <td>Postre</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>Botana de jamón serrano</td>
-                            <td>Botana</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>Ensalada César</td>
-                            <td>Ensalada</td>
-                            <td>2</td>
-                        </tr>
+                        <?php
+                        $labelsGrafica2 = [];
+                        $numeroPlatillosVisitados = [];
+                        $platillo->getEstadisticaPlatillosMasVisitados('2021');
+                        while ($row = $platillo->next()) :
+                        ?>
+                            <tr>
+                                <td><?= $row->Platillo ?></td>
+                                <td><?= $row->Categoria ?></td>
+                                <td><?= $row->NumeroVisita ?></td>
+                            </tr>
+                        <?php
+                            $labelsGrafica2[]  = $row->Platillo;
+                            $numeroPlatillosVisitados[] = $row->NumeroVisita;
+                        endwhile; ?>
                     </tbody>
                 </table>
             </div>
@@ -150,16 +155,16 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Albóndigas a la boloñesa</td>
-                            <td>Comida</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>Carlota de chocolate</td>
-                            <td>Postre</td>
-                            <td>2</td>
-                        </tr>
+                        <?php
+                        $platillo->getEstadisticaPlatillosMasDescargados('2021');
+                        while ($row = $platillo->next()) :
+                        ?>
+                            <tr>
+                                <td><?= $row->Platillo ?></td>
+                                <td><?= $row->Categoria ?></td>
+                                <td><?= $row->NumeroDescarga ?></td>
+                            </tr>
+                        <?php endwhile; ?>
                     </tbody>
                 </table>
             </div>
@@ -185,8 +190,314 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
             </div>
         </div>
     </footer>
+    
+   
 
     <?php include $templates_footer_admin ?>
+    <script>
+        // Grafica de barra 1
+        var color = Chart.helpers.color;
+        var barChartData1 = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            datasets: [
+                <?php
+                function returnValue($position, $value, $cadena) {
+                    $valueString = explode(',', $cadena);
+                    $valueString[$position-1] = $value;
+                    $valueString = implode(',', $valueString);
+                    return $valueString;
+                }
+
+                for($i = 0; $i < sizeof($dataBarra1); $i++) {
+
+                    switch($dataBarra1[$i]->Mes) {
+                        case 1:
+                            $valueB1 = $dataBarra1[$i]->Visitas . ',0,0,0,0,0,0,0,0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 2:
+                            $valueB1 = '0,' . $dataBarra1[$i]->Visitas .',0,0,0,0,0,0,0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 3:
+                            $valueB1 = '0,0,' . $dataBarra1[$i]->Visitas .',0,0,0,0,0,0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 4:
+                            $valueB1 = '0,0,0,' . $dataBarra1[$i]->Visitas .',0,0,0,0,0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 5:
+                            $valueB1 = '0,0,0,0,' . $dataBarra1[$i]->Visitas .',0,0,0,0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 6:
+                            $valueB1 = '0,0,0,0,0,' . $dataBarra1[$i]->Visitas .',0,0,0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 7:
+                            $valueB1 = '0,0,0,0,0,0,' . $dataBarra1[$i]->Visitas .',0,0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 8:
+                            $valueB1 = '0,0,0,0,0,0,0,' . $dataBarra1[$i]->Visitas .',0,0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 9:
+                            $valueB1 = '0,0,0,0,0,0,0,0,' . $dataBarra1[$i]->Visitas .',0,0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 10:
+                            $valueB1 = '0,0,0,0,0,0,0,0,0,' . $dataBarra1[$i]->Visitas .',0,0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 11:
+                            $valueB1 = '0,0,0,0,0,0,0,0,0,0,' . $dataBarra1[$i]->Visitas .',0';
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                        case 12:
+                            $valueB1 = '0,0,0,0,0,0,0,0,0,0,0,' . $dataBarra1[$i]->Visitas;
+                            if($dataBarra1[$i]->Categoria == $itemTemp->Categoria) {
+                                $valueB1 = returnValue($dataBarra1[$i]->Mes, $dataBarra1[$i]->Visitas, $valueB1Temp);
+                            }
+                            break;
+                    }
+                    
+                    $itemTemp = $dataBarra1[$i];
+                    $valueB1Temp = $valueB1;
+
+                    if(isset($itemTemp->Categoria) && ($itemTemp->Categoria != $dataBarra1[$i+1]->Categoria)) {
+                        $color = "rgb(" . rand(0, 255) . "," . rand(0, 255) . "," . rand(0, 255) . ")";
+                        $json = "{
+                            label: '$itemTemp->Categoria',
+                            backgroundColor: color('$color').alpha(0.5).rgbString(),
+                            borderColor: color('$color'),
+                            borderWidth: 1,
+                            data: [
+                                $valueB1Temp
+                            ]
+                        },";
+                        echo $json;
+                    }
+                }
+                ?>
+            ]
+        };
+
+        // Grafica de pastel platillos
+        var configPlatillos = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        <?= implode(',', $numeroPlatillosVisitados); ?>
+                    ],
+                    backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                        window.chartColors.blue,
+                        window.chartColors.cyan,
+                        window.chartColors.purple,
+                        window.chartColors.pink,
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    <?php
+                    foreach ($labelsGrafica2 as $item) {
+                        echo "'" . $item . "',";
+                    }
+                    ?>
+                ]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Platillos más visitados en el año 2021'
+                }
+            }
+        };
+
+        // Grafica de barra 2
+        var barChartData2 = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            datasets: [
+                <?php
+                function returnValue2($position, $value, $cadena) {
+                    $valueString = explode(',', $cadena);
+                    $valueString[$position-1] = $value;
+                    $valueString = implode(',', $valueString);
+                    return $valueString;
+                }
+
+                for($i = 0; $i < sizeof($dataBarra2); $i++) {
+
+                    switch($dataBarra2[$i]->Mes) {
+                        case 1:
+                            $valueB2 = $dataBarra2[$i]->Descargas . ',0,0,0,0,0,0,0,0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 2:
+                            $valueB2 = '0,' . $dataBarra2[$i]->Descargas .',0,0,0,0,0,0,0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 3:
+                            $valueB2 = '0,0,' . $dataBarra2[$i]->Descargas .',0,0,0,0,0,0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 4:
+                            $valueB2 = '0,0,0,' . $dataBarra2[$i]->Descargas .',0,0,0,0,0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 5:
+                            $valueB2 = '0,0,0,0,' . $dataBarra2[$i]->Descargas .',0,0,0,0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 6:
+                            $valueB2 = '0,0,0,0,0,' . $dataBarra2[$i]->Descargas .',0,0,0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 7:
+                            $valueB2 = '0,0,0,0,0,0,' . $dataBarra2[$i]->Descargas .',0,0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 8:
+                            $valueB2 = '0,0,0,0,0,0,0,' . $dataBarra2[$i]->Descargas .',0,0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 9:
+                            $valueB2 = '0,0,0,0,0,0,0,0,' . $dataBarra2[$i]->Descargas .',0,0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 10:
+                            $valueB2 = '0,0,0,0,0,0,0,0,0,' . $dataBarra2[$i]->Descargas .',0,0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 11:
+                            $valueB2 = '0,0,0,0,0,0,0,0,0,0,' . $dataBarra2[$i]->Descargas .',0';
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                        case 12:
+                            $valueB2 = '0,0,0,0,0,0,0,0,0,0,0,' . $dataBarra2[$i]->Descargas;
+                            if($dataBarra2[$i]->Platillo == $itemTemp2->Platillo) {
+                                $valueB2 = returnValue2($dataBarra2[$i]->Mes, $dataBarra2[$i]->Descargas, $valueB2Temp);
+                            }
+                            break;
+                    }
+                    
+                    $itemTemp2 = $dataBarra2[$i];
+                    $valueB2Temp = $valueB2;
+
+                    if(isset($itemTemp2->Platillo) && ($itemTemp2->Platillo != $dataBarra2[$i+1]->Platillo)) {
+                        $color = "rgb(" . rand(0, 255) . "," . rand(0, 255) . "," . rand(0, 255) . ")";
+                        $json = "{
+                            label: '$itemTemp2->Platillo',
+                            backgroundColor: color('$color').alpha(0.5).rgbString(),
+                            borderColor: color('$color'),
+                            borderWidth: 1,
+                            data: [
+                                $valueB2Temp
+                            ]
+                        },";
+                        echo $json;
+                    }
+                }
+                ?>
+            ]
+        };
+
+
+        window.onload = function() {
+            // Graficas de platillos
+            if (document.getElementById('graficaUnoPlatillo')) {
+
+                /* Grafica de barra1 */
+                var ctx2 = document.getElementById('graficaUnoPlatillo').getContext('2d');
+                window.myBar = new Chart(ctx2, {
+                    type: 'bar',
+                    data: barChartData1,
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Tipo de platillos más visitados en el año 2021'
+                        }
+                    }
+                });
+
+                /* Grafica de pastel */
+                var ctx3 = document.getElementById('graficaDosPlatillo').getContext('2d');
+                window.myPie = new Chart(ctx3, configPlatillos);
+
+                /* Grafica de barra2 */
+                var ctx4 = document.getElementById('graficaTresPlatillo').getContext('2d');
+                window.myBar = new Chart(ctx4, {
+                    type: 'bar',
+                    data: barChartData2,
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Platillos más descargados en el año 2021'
+                        }
+                    }
+                });
+            }
+        };
+    </script>
 </body>
 
 </html>

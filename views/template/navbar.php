@@ -1,6 +1,6 @@
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-red">
+    <nav class="navbar navbar-expand-md navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand" href="/finder-food/"><b>Finder Food</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
                     </li>
                 </ul>
 
-                <a href="?page=login" class="btn btn-success mx-1 acceso"><i class="fas fa-user-cog"></i> Iniciar sesion</a>
+                <a href="?page=login" class="btn btn-outline-dark-custom mx-1 px-3 acceso"><i class="fas fa-user-cog"></i> Iniciar sesion</a>
             </div>
         </div>
     </nav>

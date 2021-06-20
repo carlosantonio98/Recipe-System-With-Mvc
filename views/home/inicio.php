@@ -45,158 +45,154 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
 
     <!-- Begin page content -->
     <main role="main">
-        <div class="container-search fondo mb-4">
-            <form>
-                <div class="form-row m-0 p-0">
-                    <div class="col-10 col-md-6 m-auto search">
-                        <input type="text" class="form-control p-3 rounded-0" id="search" placeholder="¿Qué quieres cocinar hoy?">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="col-10 col-md-7 m-auto">
-                        <div class="d-flex flex-wrap justify-content-center">
-                            <a href="#" class="btn btn-outline-white m-2">Comida</a>
-                            <a href="#" class="btn btn-outline-white m-2">Postre</a>
-                            <a href="#" class="btn btn-outline-white m-2">Desayuno</a>
-                            <a href="#" class="btn btn-outline-white m-2">Ensalada</a>
-                            <a href="#" class="btn btn-outline-white m-2">Botana</a>
-                            <a href="#" class="btn btn-outline-white m-2">Entrada</a>
-                            <a href="#" class="btn btn-outline-white m-2">Sopa</a>
-                            <a href="#" class="btn btn-outline-white m-2">Guarnisión</a>
-                            <a href="#" class="btn btn-outline-white m-2">Bebida</a>
-                            <a href="#" class="btn btn-outline-white m-2">Papilla</a>
+        <div class="container-search mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-5 col-lg-6 d-flex align-items-center pr-5">
+                        <div class="content-description">
+                            <h1 class="title-search">Deliciosas Recetas Estan Esperando Por TÍ</h1>
+                            <a href="#" class="btn btn-dark-custom px-3 mt-4 mb-5 d-flex justify-content-between align-items-center"><span>Ver Más</span><i class="fas fa-long-arrow-alt-right"></i></a>
+                            <div class="options d-flex align-items-center">
+                                <a href="#" class="btn"><i class="fas fa-hamburger"></i></a>
+                                <a href="#" class="btn ml-4"><i class="fas fa-stroopwafel"></i></a>
+                                <a href="#" class="btn ml-4"><i class="fas fa-egg"></i></a>
+                                <a href="#" class="btn ml-4"><i class="fas fa-carrot"></i></a>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-7 col-lg-6 d-flex justify-content-center align-items-center">
+                        <div class="bg-dish"></div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
-
         <div class="container-recipes">
             <div class="container">
                 <!-- Section comida-->
-                <section class="mb-5">
-                    <div class="header-title mb-4">
-                        <h4 class="text-center">
-                            Comidas
-                        </h4>
-                    </div>
-                    <div class="row">
+                <section>
+                    <div class="row flex-column-reverse flex-lg-row">
+                        <div class="col-12 col-lg-8">
+                            <div class="row">
 
-                        <?php foreach ($platillosCat1 as $item) : ?>
-                            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                <div class="card w-100 text-center" style="width: 18rem;">
-                                    <span class="badge badge-danger">Nuevo</span>
-                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Comida">
-                                    <div class="card-body">
-                                        <div class="mb-2">
-                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
-                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
+                                <?php foreach ($platillosCat1 as $item) : ?>
+                                    <div class="col-12 col-md-6 col-lg-4 mb-4 mt-dish">
+                                        <div class="card w-100 d-flex justify-content-center align-items-center" style="width: 18rem;">
+                                            <img src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Desayuno">
+                                            <div class="card-body">
+                                                <h6 class="card-title mb-2"><?= $item->Platillo ?></h6>
+                                                <p class="p-0 m-0 mb-1 text-muted"><i class="fas fa-user"></i> <?= $item->NombreUsuario ?></p>
+                                                <p class="p-0 m-0 mb-2"><i class="fas fa-quote-left"></i> <?= $item->Categoria ?></p>
+                                                <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-view-more"><i class="fas fa-eye"></i></a>
+                                            </div>
                                         </div>
-                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
-                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                                     </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+                                <?php endforeach; ?>
 
-                    </div>
-                    <div class="footer-more text-center">
-                        <a href="?page=mas-platillos&id=1" class="btn btn-red">Ver más</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <h2 class="title-category">Comida</h2>
+                            <p class="description-category">Nuestro apartado de comida contiene las comidas mas populares y queridos por los usuarios, aprende a crear des una galleta hasta hornear un pastel</p>
+                            <div class="footer-more text-center">
+                                <a href="?page=mas-platillos&id=1" class="btn btn-dark-custom">Ver más</a>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Section postre-->
-                <section class="mb-5">
-                    <div class="header-title mb-4">
-                        <h4 class="text-center">
-                            Postres
-                        </h4>
-                    </div>
+                <section>
                     <div class="row">
-
-                        <?php foreach ($platillosCat2 as $item) : ?>
-                            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                <div class="card w-100 text-center" style="width: 18rem;">
-                                    <span class="badge badge-danger">Nuevo</span>
-                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Postre">
-                                    <div class="card-body">
-                                        <div class="mb-2">
-                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
-                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
-                                        </div>
-                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
-                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                    </div>
-                                </div>
+                        <div class="col-12 col-lg-4">
+                            <h2 class="title-category">Postre</h2>
+                            <p class="description-category">Nuestro apartado de postres contiene los postres mas populares y queridos por los usuarios, aprende a crear des una galleta hasta hornear un pastel</p>
+                            <div class="footer-more text-center">
+                                <a href="?page=mas-platillos&id=2" class="btn btn-dark-custom">Ver más</a>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            <div class="row">
 
-                    </div>
-                    <div class="footer-more text-center">
-                        <a href="?page=mas-platillos&id=2" class="btn btn-red">Ver más</a>
+                                <?php foreach ($platillosCat2 as $item) : ?>
+                                    <div class="col-12 col-md-6 col-lg-4 mb-4 mt-dish">
+                                        <div class="card w-100 d-flex justify-content-center align-items-center" style="width: 18rem;">
+                                            <img src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Postre">
+                                            <div class="card-body">
+                                                <h6 class="card-title mb-2"><?= $item->Platillo ?></h6>
+                                                <p class="p-0 m-0 mb-1 text-muted"><i class="fas fa-user"></i> <?= $item->NombreUsuario ?></p>
+                                                <p class="p-0 m-0 mb-2"><i class="fas fa-quote-left"></i> <?= $item->Categoria ?></p>
+                                                <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-view-more"><i class="fas fa-eye"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Section desayunos-->
-                <section class="mb-5">
-                    <div class="header-title mb-4">
-                        <h4 class="text-center">
-                            Desayunos
-                        </h4>
-                    </div>
-                    <div class="row">
+                <section>
+                    <div class="row flex-column-reverse flex-lg-row">
+                        <div class="col-12 col-lg-8">
+                            <div class="row">
 
-                        <?php foreach ($platillosCat3 as $item) : ?>
-                            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                <div class="card w-100 text-center" style="width: 18rem;">
-                                    <span class="badge badge-danger">Nuevo</span>
-                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Desayuno">
-                                    <div class="card-body">
-                                        <div class="mb-2">
-                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
-                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
+                                <?php foreach ($platillosCat3 as $item) : ?>
+                                    <div class="col-12 col-md-6 col-lg-4 mb-4 mt-dish">
+                                        <div class="card w-100 d-flex justify-content-center align-items-center" style="width: 18rem;">
+                                            <img src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Desayuno">
+                                            <div class="card-body">
+                                                <h6 class="card-title mb-2"><?= $item->Platillo ?></h6>
+                                                <p class="p-0 m-0 mb-1 text-muted"><i class="fas fa-user"></i> <?= $item->NombreUsuario ?></p>
+                                                <p class="p-0 m-0 mb-2"><i class="fas fa-quote-left"></i> <?= $item->Categoria ?></p>
+                                                <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-view-more"><i class="fas fa-eye"></i></a>
+                                            </div>
                                         </div>
-                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
-                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
                                     </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+                                <?php endforeach; ?>
 
-                    </div>
-                    <div class="footer-more text-center">
-                        <a href="?page=mas-platillos&id=3" class="btn btn-red">Ver más</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <h2 class="title-category">Desayuno</h2>
+                            <p class="description-category">Nuestro apartado de desayuno contiene los desayunos mas populares y queridos por los usuarios, aprende a crear des una galleta hasta hornear un pastel</p>
+                            <div class="footer-more text-center">
+                                <a href="?page=mas-platillos&id=3" class="btn btn-dark-custom">Ver más</a>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Section ensalada-->
-                <section class="mb-5">
-                    <div class="header-title mb-4">
-                        <h4 class="text-center">
-                            Ensaladas
-                        </h4>
-                    </div>
+                <section>
                     <div class="row">
-
-                        <?php foreach ($platillosCat4 as $item) : ?>
-                            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                <div class="card w-100 text-center" style="width: 18rem;">
-                                    <span class="badge badge-danger">Nuevo</span>
-                                    <img class="card-img-top" src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Ensalada">
-                                    <div class="card-body">
-                                        <div class="mb-2">
-                                            <h5 class="card-title mb-0"><?= $item->Platillo ?></h5>
-                                            <small class="card-subtitle color-red"><?= $item->Categoria ?></small>
-                                        </div>
-                                        <p class="card-text"><span class="text-muted">escrito por</span> <?= $item->NombreUsuario ?></p>
-                                        <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-outline-primary btn-block">Ver receta</a>
-                                    </div>
-                                </div>
+                        <div class="col-12 col-lg-4">
+                            <h2 class="title-category">Ensalada</h2>
+                            <p class="description-category">Nuestro apartado de ensalada contiene las ensaladas mas populares y queridos por los usuarios, aprende a crear des una galleta hasta hornear un pastel</p>
+                            <div class="footer-more text-center">
+                                <a href="?page=mas-platillos&id=4" class="btn btn-dark-custom">Ver más</a>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            <div class="row">
 
-                    </div>
-                    <div class="footer-more text-center">
-                        <a href="?page=mas-platillos&id=4" class="btn btn-red">Ver más</a>
+                                <?php foreach ($platillosCat4 as $item) : ?>
+                                    <div class="col-12 col-md-6 col-lg-4 mb-4 mt-dish">
+                                        <div class="card w-100 d-flex justify-content-center align-items-center" style="width: 18rem;">
+                                            <img src="resources/img/platillos/<?= $item->ImagenPlatillo ?>" alt="Postre">
+                                            <div class="card-body">
+                                                <h6 class="card-title mb-2"><?= $item->Platillo ?></h6>
+                                                <p class="p-0 m-0 mb-1 text-muted"><i class="fas fa-user"></i> <?= $item->NombreUsuario ?></p>
+                                                <p class="p-0 m-0 mb-2"><i class="fas fa-quote-left"></i> <?= $item->Categoria ?></p>
+                                                <a href="?page=platillo&id=<?= $item->IdPlatillo ?>" class="btn btn-view-more"><i class="fas fa-eye"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

@@ -19,6 +19,14 @@ class Usuario extends Model {
             echo "<option $comparation value=$row->IdRol>$row->Rol</option>";
         }
     }
+
+    public function getEstadisticaUsuariosRegistrados() {
+        $this->data = $this->db->recordSet("SELECT Pais, COUNT(FkPais) as Cantidad
+                                            FROM fin_usuarios 
+                                            INNER JOIN cat_paises 
+                                            On cat_paises.IdPais = fin_usuarios.FkPais 
+                                            GROUP BY Pais");
+    }
 }
 
 $usuario = new Usuario($db);

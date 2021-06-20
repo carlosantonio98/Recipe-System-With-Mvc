@@ -5,6 +5,11 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 }
 ?>
 
+
+<?php include $base_dir . "/models/model.usuario.php" ?>
+<?Php 
+    $usuario->getEstadisticaUsuariosRegistrados();
+?>
 <?php include $templates_header_admin ?>
 
 <body class="d-flex flex-column h-100">
@@ -43,22 +48,20 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                         </tr>
                     </thead>
                     <tbody>
+                        <?php 
+                            $paises = [];
+                            $numeroUsuariosRegistrados = [];
+                            while($row = $usuario->next()): 
+                        ?>
                         <tr>
-                            <td>Mexico</td>
-                            <td>2</td>
+                            <td><?= $row->Pais ?></td>
+                            <td><?= $row->Cantidad ?></td>
                         </tr>
-                        <tr>
-                            <td>Puerto Rico</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Argentina</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Francia</td>
-                            <td>1</td>
-                        </tr>
+                        <?php 
+                            $paises[] = $row->Pais;
+                            $numeroUsuariosRegistrados[] = $row->Cantidad;
+                            endwhile;
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -87,6 +90,54 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
     </footer>
 
     <?php include $templates_footer_admin ?>
+    <script>
+        // Grafica de pastel usuarios
+        var configUsuarios = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        <?= implode(',', $numeroUsuariosRegistrados) ?>
+                    ],
+                    backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                        window.chartColors.blue,
+                        window.chartColors.cyan,
+                        window.chartColors.purple,
+                        window.chartColors.pink,
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    <?php 
+                        foreach ($paises as $pais) {
+                            echo "'" . $pais . "',";
+                        }
+                    ?>
+                ]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Usuarios registrados por pais'
+                }
+            }
+        };
+
+        window.onload = function() {
+            // Grafica de usuarios
+            if (document.getElementById('graficaUnoUsuario')) {
+
+                // Grafica de pastel usuarios
+                var ctx1 = document.getElementById('graficaUnoUsuario').getContext('2d');
+                window.myPie = new Chart(ctx1, configUsuarios);
+            }
+        };
+    </script>
 </body>
 
 </html>

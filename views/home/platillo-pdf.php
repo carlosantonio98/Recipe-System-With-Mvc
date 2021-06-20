@@ -10,6 +10,11 @@
 // Include the main TCPDF library (search for installation path).
 require_once('./vendor/tcpdf/tcpdf.php');
 require_once("./models/model.platillo.php");
+require_once("./models/model.descarga-platillo.php");
+
+// Actualizar numero de descargas
+$id = $_GET['id'];
+$descargaPlatillo->createDownload($id);
 
 // extend TCPF with custom functions
 class MYPDF extends TCPDF {
@@ -63,7 +68,6 @@ $pdf->AddPage();
 $pdf->Image('resources/img/formatos/platillo.jpg', 25, 30, 160, 210);
 
 // load datas
-$id = $_GET['id'];
 $platillo->getOne($id);
 
 $pdf->Image('./resources/img/platillos/' . $platillo->data->ImagenPlatillo, 80, 43, 50, 40);

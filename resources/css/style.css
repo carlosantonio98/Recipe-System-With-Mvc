@@ -1,213 +1,318 @@
-        body {
-            color: #121212;
-            font-family: sans-serif;
-        }
-        
-        h3 {
-            font-size: 1.8rem;
-            font-weight: bolder;
-        }
-        
-        h4 {
-            font-size: 1.67rem;
-            font-weight: bolder;
-        }
-        
-        h6 {
-            font-size: 1.2rem;
-            font-weight: bolder;
-        }
-        
-        img {
-            object-fit: cover;
-        }
-        
-        small {
-            font-weight: bolder;
-        }
-        /* Fondo */
-        
-        .fondo {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            background-image: url(../img/fondo.jpg);
-            background-position: center;
-            background-size: cover;
-        }
-        
-        .fondo::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 400px;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        
-        .bg-red {
-            background-color: #ec1c24;
-        }
-        
-        .color-red {
-            color: #ec1c24;
-        }
-        
-        .color-black {
-            color: #121212;
-        }
-        
-        .border-red {
-            border: 1px solid #ce191f;
-        }
-        
-        .b-shadow {
-            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
-        }
-        /* Btns */
-        
-        .btn-outline-white {
-            color: #ffff;
-            background-color: transparent;
-            border: 1px solid #ffff;
-            cursor: pointer;
-        }
-        
-        .btn-outline-white:hover {
-            color: #ec1c24;
-            background-color: #ffff;
-        }
-        
-        .btn-outline-red {
-            color: #ec1c24;
-            background-color: transparent;
-            border: 1px solid #ec1c24;
-            cursor: pointer;
-        }
-        
-        .btn-outline-red:hover {
-            color: #fff;
-            background-color: #ec1c24;
-        }
-        
-        .btn-red {
-            color: #fff;
-            background-color: #ec1c24;
-            border-color: #ec1c24;
-        }
-        
-        .btn-red:hover {
-            color: #fff;
-            background-color: #ce191f;
-            border-color: #ce191f;
-        }
-        /* Grafica */
-        
-        .grafica {
-            margin-top: 40px;
-            margin-bottom: 100px;
-        }
-        /* Search */
-        
-        .container-search {
-            position: relative;
-        }
-        
-        .container-search form {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-        }
-        
-        .container-search .search {
-            position: relative;
-        }
-        
-        .container-search .search input {
-            color: #ffff;
-            background-color: rgba(0, 0, 0, 0.2);
-            border: none;
-            border-bottom: 2px solid #ec1c24;
-            font-size: 1.4rem;
-        }
-        
-        .container-search .search input::placeholder {
-            color: #ffff;
-        }
-        
-        .container-search .search i {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.4rem;
-            color: #ffff;
-        }
-        /* section recetas */
-        
-        .container-recipes .header-title {
-            color: #121212;
-            border-bottom: 2px solid #ec1c24;
-        }
-        
-        .container-recipes .card {
-            position: relative;
-        }
-        
-        .container-recipes .card img {
-            width: 100%;
-            height: 220px;
-        }
-        
-        .container-recipes .card .badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        /* Menu empleado */
-        
-        main .menu .card {
-            border: 1px solid #fff;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-            transition: 300ms all ease-in-out;
-        }
-        
-        main .menu a {
-            text-decoration: none;
-            color: #121212;
-        }
-        
-        main .menu a:hover>.card {
-            background-color: #fff;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        main .menu a i {
-            font-size: 60px;
-        }
-        /* platillo */
-        
-        .container-recipe .header-recipe img {
-            width: 100%;
-            height: 400px;
-        }
-        
-        .container-recipe .circle-shadow {
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            background-color: #fff;
-            color: #121212;
-            border-radius: 50%;
-            box-shadow: 0 0 9px rgba(0, 0, 0, 0.6);
-        }
-        /* Ayuda */
-        
-        .help .help-answers p,
-        .help .help-answers li {
-            color: #3b3b3b;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+html,
+body {
+    background-color: #F8FCFD;
+    color: #121212;
+    font-family: 'Poppins', sans-serif;
+}
+
+h3 {
+    font-size: 1.8rem;
+    font-weight: bolder;
+}
+
+h4 {
+    font-size: 1.67rem;
+    font-weight: bolder;
+}
+
+h6 {
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+img {
+    object-fit: cover;
+}
+
+small {
+    font-weight: bolder;
+}
+
+
+/* Fondo */
+
+.fondo {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url(../img/fondo.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.fondo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.bg-red {
+    background-color: #ec1c24;
+}
+
+.color-red {
+    color: #ec1c24;
+}
+
+.color-black {
+    color: #121212;
+}
+
+.border-red {
+    border: 1px solid #ce191f;
+}
+
+.b-shadow {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Btns */
+
+.btn-outline-white {
+    color: #ffff;
+    background-color: transparent;
+    border: 1px solid #ffff;
+    cursor: pointer;
+}
+
+.btn-outline-white:hover {
+    color: #ec1c24;
+    background-color: #ffff;
+}
+
+.btn-outline-yellow {
+    color: #DCC200;
+    background-color: transparent;
+    border: 1px solid #DCC200;
+    cursor: pointer;
+}
+
+.btn-outline-yellow:hover {
+    color: #fff;
+    background-color: #dace8a;
+}
+
+.btn-outline-red {
+    color: #ec1c24;
+    background-color: transparent;
+    border: 1px solid #ec1c24;
+    cursor: pointer;
+}
+
+.btn-outline-red:hover {
+    color: #fff;
+    background-color: #ec1c24;
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #ec1c24;
+    border-color: #ec1c24;
+}
+
+.btn-red:hover {
+    color: #fff;
+    background-color: #ce191f;
+    border-color: #ce191f;
+}
+
+.btn-dark-custom {
+    width: 150px;
+    border-radius: 15px 15px 0px 15px;
+    background-color: #121212;
+    color: #fff;
+    font-size: 15px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
+    transition: 300ms all ease-in-out;
+}
+
+.btn-dark-custom:hover {
+    background-color: #3f3f3f;
+    color: #fff;
+}
+
+.btn-outline-dark-custom {
+    border-radius: 15px 0px 15px 15px;
+    border: 1px solid #121212;
+    color: #121212;
+    transition: 300ms all ease-in-out;
+}
+
+.btn-outline-dark-custom:hover {
+    background-color: #121212;
+    color: #fff;
+}
+
+
+/* Grafica */
+
+.grafica {
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+
+
+/* Search */
+
+.container-search {
+    position: relative;
+}
+
+.container-search .title-search {
+    font-weight: bolder;
+    letter-spacing: 2px;
+}
+
+.container-search .bg-dish {
+    width: 500px;
+    height: 500px;
+    min-width: 300px;
+    min-height: 300px;
+    background-image: url('../img/platillo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-filter: drop-shadow(5px 5px 5px rgba(34, 34, 34, 0.371));
+    filter: drop-shadow(5px 5px 5px rgba(34, 34, 34, 0.371));
+}
+
+.container-search .options a {
+    color: #3f3f3f;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.2);
+    transition: 300ms all ease-in-out;
+}
+
+.container-search .options a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+
+/* section recetas */
+
+.container-recipes .header-title {
+    color: #121212;
+}
+
+.container-recipes .title-category {
+    font-weight: bolder;
+}
+
+.container-recipes .description-category {
+    color: #767676;
+}
+
+.container-recipes section {
+    margin-bottom: 150px;
+}
+
+.container-recipes .card {
+    position: relative;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.container-recipes .card-title {
+    font-size: 15px;
+}
+
+.container-recipes p {
+    font-size: 12px;
+}
+
+.container-recipes .card img {
+    position: absolute;
+    top: -80px;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.container-recipes .card .card-body {
+    margin-top: 100px;
+}
+
+.container-recipes .card .card-body .btn-view-more {
+    position: absolute;
+    bottom: -15px;
+    right: 10px;
+    border-radius: 0px 15px 0px 15px;
+    background-color: #121212;
+    color: #fff;
+    font-size: 15px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
+    transition: 300ms all ease-in-out;
+}
+
+.container-recipes .card .card-body .btn-view-more:hover {
+    background-color: #3f3f3f;
+    color: #fff;
+}
+
+.container-recipes .mt-lg-dish {
+    margin-top: 100px;
+}
+
+@media (max-width: 991px) {
+    .container-recipes .mt-dish {
+        margin-top: 120px;
+    }
+}
+
+/* Menu empleado */
+
+main .menu .card {
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    transition: 300ms all ease-in-out;
+}
+
+main .menu a {
+    text-decoration: none;
+    color: #121212;
+}
+
+main .menu a:hover>.card {
+    background-color: #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
+main .menu a i {
+    font-size: 60px;
+}
+
+
+/* platillo */
+
+.container-recipe .header-recipe img {
+    width: 100%;
+    height: 400px;
+}
+
+.container-recipe .circle-shadow {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #fff;
+    color: #121212;
+    border-radius: 50%;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Ayuda */
+
+.help .help-answers p,
+.help .help-answers li {
+    color: #3b3b3b;
+}

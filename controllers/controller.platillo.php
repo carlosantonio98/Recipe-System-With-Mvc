@@ -11,7 +11,7 @@ if ($_POST) {
     if ($tipo == 'nuevo') {
         setValuesPOST($platillo);
         $platillo->values[3] = guardarImagen();
-        $platillo->values[9] = 1;
+        $platillo->values[7] = 1;
         $platillo->insert();
         
         // Comparamos por roles para redirigir
@@ -49,7 +49,7 @@ if ($_POST) {
 
         $platillo->getOne($id);
         preloadDatasInValues($platillo);
-        $platillo->values[9] = $_POST['seguimiento'];
+        $platillo->values[7] = $_POST['seguimiento'];
 
         // Actualizamos el platillo
         $platillo->update($id);
@@ -79,8 +79,6 @@ function setValuesPOST($platillo)
     $platillo->values[] = '';
     $platillo->values[] = date('Y-m-d');
     $platillo->values[] = date('H:m:i');
-    $platillo->values[] = 0;
-    $platillo->values[] = 0;
     $platillo->values[] = $_POST['categoria'];
     $platillo->values[] = '';
     $platillo->values[] = $_SESSION['usuario']->IdUsuario;
@@ -95,11 +93,9 @@ function preloadDatasInValues($platillo)
     $platillo->values[] = $platillo->data->ImagenPlatillo;
     $platillo->values[] = $platillo->data->FechaRegistro;
     $platillo->values[] = $platillo->data->HoraRegistro;
-    $platillo->values[] = $platillo->data->NumeroVisita;
-    $platillo->values[] = $platillo->data->NumeroDescarga;
     $platillo->values[] = $platillo->data->FkCategoria;
     $platillo->values[] = '';
-    $platillo->values[] = $platillo->data->FkUsuario;;
+    $platillo->values[] = $platillo->data->FkUsuario;
 }
 
 function guardarImagen() {

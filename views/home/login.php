@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6 m-auto">
                 <div class="card">
                     <div class="card-body">
                         <h1 class="card-title">Iniciar sesion</h1>
