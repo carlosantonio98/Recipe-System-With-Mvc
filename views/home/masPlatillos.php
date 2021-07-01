@@ -14,25 +14,13 @@ if ($_SESSION['usuario']->FkRol == 1) {
 
 
 include_once('./models/model.platillo.php');
+include_once('./models/model.categoria.php');
+
 $idCategoria = $_GET['id'];
 $platillo->getWhere('FkCategoria=' . $idCategoria . ' AND FkSeguimiento=2');
 
-// creando variable para el titulo
-$titulo = '';
-switch ($idCategoria) {
-    case 1:
-        $titulo = 'comidas';
-        break;
-    case 2:
-        $titulo = 'postres';
-        break;
-    case 3:
-        $titulo = 'desayunos';
-        break;
-    case 4:
-        $titulo = 'ensaladas';
-        break;
-}
+$categoria->getOne($idCategoria);
+$titulo = $categoria->data->Categoria;
 ?>
 
 
@@ -55,13 +43,20 @@ switch ($idCategoria) {
             <section class="mb-5">
                 <div class="header-title mb-4">
                     <h4 class="text-center">
-                        Mas recetas de <?= $titulo ?>
+                        Más recetas de <?= $titulo ?>
                     </h4>
                 </div>
                 <div class="row">
 
-                    <?php while ($row = $platillo->next()) : ?>
-                        <div class="col-12 col-md-6 col-lg-4 mb-4 mt-lg-dish">
+                    <?php 
+                        $delay = 50; 
+                        $duration = 1000; 
+
+                        while ($row = $platillo->next()) :
+                            $delay += 100; 
+                            $duration += 150; 
+                    ?>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4 mt-lg-dish" data-aos="fade-down" data-aos-offset="200" data-aos-delay="<?= $delay ?>" data-aos-duration="<?=  $duration ?>">
                             <div class="card w-100 d-flex justify-content-center align-items-center" style="width: 18rem;">
                                 <img src="resources/img/platillos/<?= $row->ImagenPlatillo ?>" alt="<?= $row->Categoria ?>">
                                 <div class="card-body">
@@ -83,9 +78,9 @@ switch ($idCategoria) {
         <div class="container">
             <div class="text-center">
                 <div class="mb-3">
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
                 </div>
                 <span class="text-muted">Copyright &copy; Finder Food 2021</span>
             </div>

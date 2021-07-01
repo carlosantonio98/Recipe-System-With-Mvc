@@ -10,8 +10,10 @@ if ($_SESSION['usuario']->FkRol == 1) {
     include $templates_header;
 }
 
+
 // Implementando los modelos
 include_once('./models/model.platillo.php');
+
 
 // Cargando las recetas
 function getDishes($platillo, $idCategorias, $delimitador)
@@ -45,22 +47,22 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
 
     <!-- Begin page content -->
     <main role="main">
-        <div class="container-search mb-5">
+        <div class="container-search">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-5 col-lg-6 d-flex align-items-center pr-5">
+                    <div class="col-12 col-md-5 col-lg-6 d-flex align-items-center pr-5" data-aos="fade-right" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000">
                         <div class="content-description">
                             <h1 class="title-search">Deliciosas Recetas Estan Esperando Por TÍ</h1>
-                            <a href="#" class="btn btn-dark-custom px-3 mt-4 mb-5 d-flex justify-content-between align-items-center"><span>Ver Más</span><i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="?page=mas-platillos&id=1" class="btn btn-dark-custom px-3 mt-4 mb-5 d-flex justify-content-between align-items-center"><span>Ver Más</span><i class="fas fa-long-arrow-alt-right"></i></a>
                             <div class="options d-flex align-items-center">
-                                <a href="#" class="btn"><i class="fas fa-hamburger"></i></a>
-                                <a href="#" class="btn ml-4"><i class="fas fa-stroopwafel"></i></a>
-                                <a href="#" class="btn ml-4"><i class="fas fa-egg"></i></a>
-                                <a href="#" class="btn ml-4"><i class="fas fa-carrot"></i></a>
+                                <a href="?page=mas-platillos&id=1" class="btn"><i class="fas fa-hamburger"></i></a>
+                                <a href="?page=mas-platillos&id=2" class="btn ml-4"><i class="fas fa-stroopwafel"></i></a>
+                                <a href="?page=mas-platillos&id=3" class="btn ml-4"><i class="fas fa-egg"></i></a>
+                                <a href="?page=mas-platillos&id=4" class="btn ml-4"><i class="fas fa-carrot"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-7 col-lg-6 d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-md-7 col-lg-6 d-flex justify-content-center align-items-center" data-aos="fade-down" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000">
                         <div class="bg-dish"></div>
                     </div>
                 </div>
@@ -69,7 +71,7 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
         <div class="container-recipes">
             <div class="container">
                 <!-- Section comida-->
-                <section>
+                <section class="section-mt section-mb" data-aos="fade-left" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000">
                     <div class="row flex-column-reverse flex-lg-row">
                         <div class="col-12 col-lg-8">
                             <div class="row">
@@ -92,7 +94,7 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
                         </div>
                         <div class="col-12 col-lg-4">
                             <h2 class="title-category">Comida</h2>
-                            <p class="description-category">Nuestro apartado de comida contiene las comidas mas populares y queridos por los usuarios, aprende a crear des una galleta hasta hornear un pastel</p>
+                            <p class="description-category">Nuestro apartado de comida contiene las comidas mas populares y queridos por los usuarios, aprende a crear comida de manera facil</p>
                             <div class="footer-more text-center">
                                 <a href="?page=mas-platillos&id=1" class="btn btn-dark-custom">Ver más</a>
                             </div>
@@ -101,7 +103,7 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
                 </section>
 
                 <!-- Section postre-->
-                <section>
+                <section class="section-mb" data-aos="fade-right" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000">
                     <div class="row">
                         <div class="col-12 col-lg-4">
                             <h2 class="title-category">Postre</h2>
@@ -133,7 +135,7 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
                 </section>
 
                 <!-- Section desayunos-->
-                <section>
+                <section class="section-mb" data-aos="fade-left" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000">
                     <div class="row flex-column-reverse flex-lg-row">
                         <div class="col-12 col-lg-8">
                             <div class="row">
@@ -156,7 +158,7 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
                         </div>
                         <div class="col-12 col-lg-4">
                             <h2 class="title-category">Desayuno</h2>
-                            <p class="description-category">Nuestro apartado de desayuno contiene los desayunos mas populares y queridos por los usuarios, aprende a crear des una galleta hasta hornear un pastel</p>
+                            <p class="description-category">Nuestro apartado de desayuno contiene los desayunos mas populares y queridos por los usuarios, aprende a crear desayunos de manera detallada por nuestros usuarios</p>
                             <div class="footer-more text-center">
                                 <a href="?page=mas-platillos&id=3" class="btn btn-dark-custom">Ver más</a>
                             </div>
@@ -165,11 +167,11 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
                 </section>
 
                 <!-- Section ensalada-->
-                <section>
+                <section class="section-mb" data-aos="fade-right" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000">
                     <div class="row">
                         <div class="col-12 col-lg-4">
                             <h2 class="title-category">Ensalada</h2>
-                            <p class="description-category">Nuestro apartado de ensalada contiene las ensaladas mas populares y queridos por los usuarios, aprende a crear des una galleta hasta hornear un pastel</p>
+                            <p class="description-category">Nuestro apartado de ensalada contiene las ensaladas mas populares y queridos por los usuarios, aprende a crear ensaladas de manera facil con nosostros</p>
                             <div class="footer-more text-center">
                                 <a href="?page=mas-platillos&id=4" class="btn btn-dark-custom">Ver más</a>
                             </div>
@@ -204,9 +206,9 @@ $platillosCat4 = getDishes($platillo, 4, 3); // ensalada
         <div class="container">
             <div class="text-center">
                 <div class="mb-3">
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
                 </div>
                 <span class="text-muted">Copyright &copy; Finder Food 2021</span>
             </div>

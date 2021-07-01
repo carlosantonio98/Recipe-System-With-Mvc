@@ -12,6 +12,9 @@
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= $estilos_css ?>">
 
+    <!-- Estilo daos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="<?= $iconos_fontAwesome ?>">
 </head>

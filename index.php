@@ -26,6 +26,12 @@ if (isset($_GET["page"])) {
         case 'login':
             include 'views/home/login.php';
             break;
+        case 'crear-usuario':
+            include 'views/home/form-usuario.php';
+            break;     
+        case 'mi-cuenta':
+            include 'views/home/form-usuario.php';
+            break;                    
        
         # pagina cliente
         case 'menu-cliente':

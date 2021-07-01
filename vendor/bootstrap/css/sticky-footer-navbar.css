@@ -8,6 +8,10 @@ main>.container {
     padding: 60px 15px 0;
 }
 
+.footer {
+    background-color: #121212;
+}
+
 .footer>.container {
     padding-right: 15px;
     padding-left: 15px;

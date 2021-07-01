@@ -91,8 +91,8 @@ class Platillo extends Model {
 }
 
 $platillo = new Platillo($db);
-$platillo->setView ("vw_Platillos");
-$platillo->setTable("fin_Platillos");
+$platillo->setView ("vw_platillos");
+$platillo->setTable("fin_platillos");
 
 $platillo->setKey  ("IdPlatillo");
 $platillo->addField("Platillo");

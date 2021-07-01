@@ -26,16 +26,18 @@ if ($_POST) {
         $imagenTemporal = $platillo->data->ImagenPlatillo;
 
 
+        setValuesPOST($platillo);
+
         // Comparamos para ver si llega halgo por el file
         if (isset($_FILES['imagenPlatillo']['name']) && $_FILES['imagenPlatillo']['name'] != '') {
-            setValuesPOST($platillo);
             $platillo->values[3] = guardarImagen();
             unlink("C:/xampp/htdocs/proyecto/resources/img/platillos/$imagenTemporal");
         } else {
-            setValuesPOST($platillo);
             $platillo->values[3] = $imagenTemporal;
         }
-        
+
+        $platillo->values[7] = $platillo->data->FkSeguimiento;
+
         // Actualizamos el platillo
         $platillo->update($id);
         
@@ -56,7 +58,13 @@ if ($_POST) {
         header("location:../?page=buzon-platillos");
 
     } elseif ($tipo == 'borrar') {
+        $platillo->getOne($id);
+        $img = $platillo->data->ImagenPlatillo;
+
+        // delete img and register
         $platillo->deleteOne($id);
+        unlink("C:/xampp/htdocs/proyecto/resources/img/platillos/$img");
+        
         
         // comparamos por roles para redirigir
         if($_SESSION['usuario']->FkRol == 1)

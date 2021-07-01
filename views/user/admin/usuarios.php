@@ -6,6 +6,11 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
 ?>
 
 <?php include $base_dir . "/models/model.usuario.php" ?>
+<?php 
+    $usuario->getAll('IdUsuario DESC');
+?>
+
+
 <?php include $templates_header_admin ?>
 
 <body class="d-flex flex-column h-100">
@@ -89,11 +94,7 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            $usuario->getAll();
-
-                            while($row = $usuario->next()):
-                        ?>
+                        <?php while($row = $usuario->next()): ?>
                         <tr>
                             <td><?= $row->IdUsuario ?></td>
                             <td><?= $row->NombreUsuario ?></td>
@@ -120,9 +121,9 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol<>1) {
         <div class="container">
             <div class="text-center">
                 <div class="mb-3">
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
                 </div>
                 <span class="text-muted">Copyright &copy; Finder Food 2021</span>
             </div>

@@ -196,6 +196,10 @@ small {
 
 /* section recetas */
 
+.container-recipes .container {
+    overflow: hidden;
+}
+
 .container-recipes .header-title {
     color: #121212;
 }
@@ -208,8 +212,12 @@ small {
     color: #767676;
 }
 
-.container-recipes section {
-    margin-bottom: 150px;
+.container-recipes .section-mt {
+    margin-top: 160px;
+}
+
+.container-recipes .section-mb {
+    margin-bottom: 160px;
 }
 
 .container-recipes .card {
@@ -268,6 +276,7 @@ small {
     }
 }
 
+
 /* Menu empleado */
 
 main .menu .card {
@@ -315,4 +324,58 @@ main .menu a i {
 .help .help-answers p,
 .help .help-answers li {
     color: #3b3b3b;
+}
+
+
+/* Login */
+
+.login-container {
+    position: relative;
+    margin: 0px auto;
+    width: 100%;
+    max-width: 400px;
+    min-width: 300px;
+    border: none;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.05);
+}
+
+.login-container .login-container__login-form label {
+    color: #3f3f3f;
+}
+
+.login-container .login-container__login-form input {
+    padding: 5px 8px;
+}
+
+.login-container .login-container__login-form .login-container__or {
+    color: #3f3f3f;
+    text-align: center;
+}
+
+.login-container .btn-google {
+    position: relative;
+    display: block;
+    border-radius: 10px;
+    background-color: #1976D2;
+    color: #fff;
+    box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.2), 0px 2px 40px rgba(0, 0, 0, 0.2) inset;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.login-container .btn-google img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    object-fit: cover;
+    background-color: #fff;
+}
+
+.login-container .btn-google:hover {
+    background-color: #1261af;
+    color: #fff;
+    text-decoration: none;
 }

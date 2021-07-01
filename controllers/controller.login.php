@@ -5,6 +5,7 @@ $pass  = $_POST['password'];
 
 include '../resources/class/class.connection.php';
 include '../models/model.usuario.php';
+include '../models/model.visita.php';
 
 try {
     session_start();
@@ -15,8 +16,12 @@ try {
     $usuario->get($sql,array($email,$pass));
 
     if ($usuario->data->Correo==$email) {
-
         $_SESSION['usuario'] = $usuario->data;
+
+        // registrando visita de usuario
+        
+        $idUsuario = $_SESSION['usuario']->IdUsuario;
+        $visita->createVisit($idUsuario);
 
         switch ($usuario->data->FkRol) {
             case 1:

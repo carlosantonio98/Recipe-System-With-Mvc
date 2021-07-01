@@ -16,16 +16,11 @@
                             Recetas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="?page=comidas">Comidas</a>
-                            <a class="dropdown-item" href="?page=postres">Postres</a>
-                            <a class="dropdown-item" href="?page=desayunos">Desayunos</a>
-                            <a class="dropdown-item" href="?page=ensaladas">Ensaladas</a>
-                            <a class="dropdown-item" href="#">Botanas</a>
-                            <a class="dropdown-item" href="#">Entradas</a>
-                            <a class="dropdown-item" href="#">Sopas</a>
-                            <a class="dropdown-item" href="#">Guarnisiones</a>
-                            <a class="dropdown-item" href="#">Bebidas</a>
-                            <a class="dropdown-item" href="#">Papillas</a>
+                            <a class="dropdown-item" href="?page=mas-platillos&id=1">Comida</a>
+                            <a class="dropdown-item" href="?page=mas-platillos&id=2">Postre</a>
+                            <a class="dropdown-item" href="?page=mas-platillos&id=3">Desayuno</a>
+                            <a class="dropdown-item" href="?page=mas-platillos&id=4">Ensalada</a>
+                            <a class="dropdown-item" href="?page=mas-platillos&id=5">Botana</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -53,6 +48,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?page=ayuda">Ayuda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=mi-cuenta">Mi cuenta</a>
                     </li>
                 </ul>
                 <div>

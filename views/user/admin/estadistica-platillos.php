@@ -172,7 +172,6 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 1) {
             <canvas id="graficaTresPlatillo" class="grafica w-100"></canvas>
 
             <div class="text-center mb-4">
-                <a href="#" class="btn btn-primary" data-src="impresion3.pdf" data-toggle="modal" data-target="#print-modal"><i class="fas fa-print"></i> Imprimir</a>
                 <a href="?page=menu-admin" class="btn btn-outline-secondary">Regresar</a>
             </div>
         </div>
@@ -182,9 +181,9 @@ if (!isset($_SESSION['usuario']) or $_SESSION['usuario']->FkRol <> 1) {
         <div class="container">
             <div class="text-center">
                 <div class="mb-3">
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="btn btn-outline-red mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="btn btn-outline-white mx-2 rounded-circle"><i class="fab fa-instagram"></i></a>
                 </div>
                 <span class="text-muted">Copyright &copy; Finder Food 2021</span>
             </div>

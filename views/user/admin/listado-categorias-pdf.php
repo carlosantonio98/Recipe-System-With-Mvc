@@ -1,12 +1,4 @@
 <?php
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Colored Table
- * @author Nicola Asuni
- * @since 2008-03-04
- */
-
 // Include the main TCPDF library (search for installation path).
 require_once('./vendor/tcpdf/tcpdf.php');
 require_once('./resources/class/class.connection.php');

@@ -1,6 +1,7 @@
 <?php
 
 require_once("../models/model.usuario.php");
+session_start();
 
 if ($_POST) {
 
@@ -16,24 +17,31 @@ if ($_POST) {
     $usuario->values[] = $_POST['password'];
     $usuario->values[] = $_POST['pais'];
     $usuario->values[] = $_POST['rol'];
+
+    
     
 
     if ($tipo == 'nuevo') {
-        //$db->debug();
+        $location = "location:../?page=listado-usuarios";
+        if(is_null($_POST['rol']) || empty($_POST['rol'])) {
+            $usuario->values[7] = 3;
+            $location = "location:../?page=login";
+        }
+        
         $usuario->insert();
-        //die();
-        header("location:../?page=listado-usuarios");
-
+        header($location);
     } elseif ($tipo == 'actualizar') {
-        //$db->debug();
+        $location = "location:../?page=listado-usuarios";
+        if(is_null($_POST['rol']) || empty($_POST['rol'])) {
+            $usuario->values[7] = $_SESSION['usuario']->FkRol;
+            $location = "location:../?page=mi-cuenta";
+        }
+
         $usuario->update($id);
-        //die();
-        header("location:../?page=listado-usuarios");
+        header($location);
     }
     elseif ($tipo == 'borrar') {
-        //$db->debug();
         $usuario->deleteOne($id);
-        //die();
         header("location:../?page=listado-usuarios");
     }
 }
